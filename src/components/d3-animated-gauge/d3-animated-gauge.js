@@ -76,7 +76,7 @@ function createAnimatedValue(initialTarget, duration = 300, onChange) {
 
 //config
 const CONFIG = {
-  padding: 40,
+  padding: 30,
   nInnerTicks: 40,
   nOuterTicks: 5,
   ticksLength: 4,
@@ -90,6 +90,12 @@ const CONFIG = {
   maxAngle: (3 * Math.PI) / 4,
   decimal: 0,
   duration: 500,
+  outerArcColor: "#ef4444",
+  innerArcColor: "#0ea5e9",
+  textColor: "#fff",
+  backgroundColor: "#16171d",
+  needleColor: "#fff",
+  fontFamily: "system-ui",
 };
 
 //colors
@@ -106,16 +112,23 @@ export function createGaugeChart(containerSelector, title, unit, minMax, initial
 
   const valueScale = d3.scaleLinear().domain([min, max]).range([mergedConfig.minAngle, mergedConfig.maxAngle]);
 
-  const svg = d3.select(container).append("svg").style("width", "100%").style("height", "100%").style("display", "block");
+  const svg = d3
+    .select(container)
+    .append("svg")
+    .style("width", "100%")
+    .style("height", "100%")
+    .style("display", "block")
+    .style("font-family", mergedConfig.fontFamily)
+    .style("background-color", mergedConfig.backgroundColor);
   let radius = 0;
 
   const g = svg.append("g");
   const outerGroup = g.append("g").attr("transform", `translate(${radius},${radius})`);
-  const outerArcPath = outerGroup.append("path").style("fill", "#ef4444");
+  const outerArcPath = outerGroup.append("path").style("fill", mergedConfig.outerArcColor);
   const outerTicksGroup = outerGroup.append("g");
 
   const innerGroup = g.append("g").attr("transform", `translate(${radius},${radius})`);
-  const innerArcPath = innerGroup.append("path").style("fill", "#0ea5e9");
+  const innerArcPath = innerGroup.append("path").style("fill", mergedConfig.innerArcColor);
   const innerTicksGroup = innerGroup.append("g");
 
   const textGroup = g
@@ -128,14 +141,14 @@ export function createGaugeChart(containerSelector, title, unit, minMax, initial
     .style("dominant-baseline", "middle")
     .attr("dy", -70)
     .style("font-size", "0.875rem")
-    .style("fill", "white");
+    .style("fill", mergedConfig.textColor);
   const displayValueText = textGroup
     .append("text")
     .style("text-anchor", "middle")
     .style("dominant-baseline", "middle")
     .attr("dy", -42)
     .style("font-size", "1.125rem")
-    .style("fill", "white")
+    .style("fill", mergedConfig.textColor)
     .style("font-weight", "600");
   const unitText = textGroup
     .append("text")
@@ -143,18 +156,18 @@ export function createGaugeChart(containerSelector, title, unit, minMax, initial
     .style("dominant-baseline", "middle")
     .attr("dy", -25)
     .style("font-size", "0.6rem")
-    .style("fill", "white")
+    .style("fill", mergedConfig.textColor)
     .style("font-weight", "600");
 
   const needleGroup = g.append("g");
-  const needleCircle = needleGroup.append("circle").attr("cx", 0).attr("cy", 0).attr("r", mergedConfig.needleCircleRadius).style("fill", "white");
+  const needleCircle = needleGroup.append("circle").attr("cx", 0).attr("cy", 0).attr("r", mergedConfig.needleCircleRadius).style("fill", mergedConfig.needleColor);
   const needleLine = needleGroup
     .append("rect")
     .attr("x", -mergedConfig.needleStrokeWidth / 2)
     .attr("y", 0)
     .attr("width", mergedConfig.needleStrokeWidth)
     .attr("transform", `translate(0,${-mergedConfig.needleTailLength})`)
-    .style("fill", "white");
+    .style("fill", mergedConfig.needleColor);
 
   let needleAnimation = null;
   let valueAnimation = null;
@@ -247,7 +260,7 @@ export function createGaugeChart(containerSelector, title, unit, minMax, initial
             .attr("y1", 0)
             .attr("x2", (d) => convertPolarToCartesian(mergedConfig.ticksLength + mergedConfig.arcStrokeWidth, d).x)
             .attr("y2", (d) => convertPolarToCartesian(mergedConfig.ticksLength + mergedConfig.arcStrokeWidth, d).y)
-            .attr("stroke", "#ef4444")
+            .attr("stroke", mergedConfig.outerArcColor)
             .attr("stroke-width", mergedConfig.ticksStrokeWidth);
 
           group
@@ -257,7 +270,7 @@ export function createGaugeChart(containerSelector, title, unit, minMax, initial
             .style("text-anchor", "middle")
             .style("dominant-baseline", "middle")
             .style("font-size", "0.75rem")
-            .style("fill", "white")
+            .style("fill", mergedConfig.textColor)
             .attr("dy", `-${mergedConfig.ticksLength + 12}`);
 
           return group;
@@ -298,7 +311,7 @@ export function createGaugeChart(containerSelector, title, unit, minMax, initial
             .attr("y1", 0)
             .attr("x2", (d) => convertPolarToCartesian(-mergedConfig.ticksLength - mergedConfig.arcStrokeWidth, d).x)
             .attr("y2", (d) => convertPolarToCartesian(-mergedConfig.ticksLength - mergedConfig.arcStrokeWidth, d).y)
-            .attr("stroke", "#0ea5e9")
+            .attr("stroke", mergedConfig.innerArcColor)
             .attr("stroke-width", mergedConfig.ticksStrokeWidth);
 
           return group;

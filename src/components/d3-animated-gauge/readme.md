@@ -38,31 +38,62 @@ You can view, interact with, and fork the live code on Observable HQ:
 <div id="gauge-container" style="width: 300px; height: 300px;"></div>
 ```
 
-### 3. Initialize & Update In your JavaScript file, initialize the chart and call the `update` method whenever the data changes:
+### 3. Initialize & Update
+
+In your JavaScript file, initialize the chart by passing the required parameters. You can optionally pass a `config` object to customize the appearance. If you don't pass a config object, the chart will automatically use its default styling.
 
 ```javascript
-// 1. Select the container
-const container = document.getElementById("gauge-container");
+// 1. Initialize the chart
+const myGauge = createGaugeChart("#gauge-container", "Speed", "KM/h", { min: 0, max: 200 }, 0, {
+  outerArcColor: "#10b981", // Override specific properties only!
+  duration: 800, //...
+});
 
-// 2. Initialize the chart
-const myGauge = createGaugeChart(container);
+// 2. Update the chart value with animation
+myGauge.update(Math.random() * 200);
 
-// 3. Update the chart value with animation
-// (e.g., random data every 1 second)
-setInterval(() => {
-  const randomValue = Math.floor(Math.random() * 100); // Value between 0 and 100
-  myGauge.update(randomValue);
-}, 1000);
-
-// 4. Cleanup (Optional but recommended)
-// Call this method when the chart is removed from the DOM
-// to avoid memory leaks
+// 3. Cleanup (Optional but recommended to prevent memory leaks)
 // myGauge.destroy();
 ```
 
-## ⚙️ Customization
+#### Parameters Overview
 
-To change styles (colors, stroke widths, fonts, etc.), simply find the `CONFIG` object inside the `d3-animated-gauge.js` file and modify the values to match your design requirements.
+1. **`containerSelector`**: The target HTML element or CSS selector (e.g., `"#gauge-container"`).
+2. **`title`**: Text displayed at the top of the gauge.
+3. **`unit`**: Measurement unit displayed below the value.
+4. **`minMax`**: An object `{ min, max }` defining the lowest and highest values of the gauge.
+5. **`initialValue`**: _(Optional)_ The starting value on load. If omitted or set to `null`, it defaults to the `min` value.
+6. **`config`**: _(Optional)_ An object containing your custom styles. The chart intelligently merges your custom object with the defaults, so **you only need to include the specific variables you want to change**.
+
+#### Default Configuration (`config`)
+
+If you completely omit the 6th parameter, the chart applies the following default values. You can use these keys in your custom config object to tweak the design:
+
+```javascript
+{
+  padding: 30,
+  nInnerTicks: 40,
+  nOuterTicks: 5,
+  ticksLength: 4,
+  arcStrokeWidth: 2,
+  spaceBetweenArcs: 4,
+  ticksStrokeWidth: 2,
+  needleTailLength: 15,
+  needleStrokeWidth: 2,
+  needleCircleRadius: 5,
+  minAngle: (-3 _ Math.PI) / 4, // Start angle
+  maxAngle: (3 _ Math.PI) / 4, // End angle
+  decimal: 0, // Number of decimal places
+  duration: 500, // Animation duration in ms
+  outerArcColor: "#ef4444",
+  innerArcColor: "#0ea5e9",
+  textColor: "#fff",
+  backgroundColor: "#16171d",
+  needleColor: "#fff",
+  fontFamily: "system-ui"
+}
+
+```
 
 ## 📄 License
 
