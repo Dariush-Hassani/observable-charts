@@ -1,4 +1,4 @@
-import { createGaugeChart } from "./components/d3-animated-gauge";
+import { createGaugeChart } from "./components/d3-animated-gauge/d3-animated-gauge";
 import "./style.css";
 
 document.querySelector("#app").innerHTML = `<div id="chart-container" style="width:400px;height:400px"></div>`;
