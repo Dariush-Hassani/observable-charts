@@ -24,8 +24,6 @@ You can view, interact with, and fork the live code on Observable HQ:
 
 ### 1. Include the Scripts
 
-First, include the D3.js library and the gauge chart script in your HTML file. You can load the script directly from the repository using jsDelivr or GitHub Raw:
-
 ```html
 <!-- D3.js -->
 <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -34,13 +32,13 @@ First, include the D3.js library and the gauge chart script in your HTML file. Y
 <script src="https://raw.githubusercontent.com/Dariush-Hassani/observable-charts/main/src/components/d3-animated-gauge/d3-animated-gauge.js"></script>
 ```
 
-### 2. Create an HTML Container Create a `div` element with a specific width and height (or use percentages) to hold the chart: html
+### 2. Create an HTML Container Create a `div` element with a specific width and height (or use percentages) to hold the chart:
 
 ```html
 <div id="gauge-container" style="width: 300px; height: 300px;"></div>
 ```
 
-### 3. Initialize & Update In your JavaScript file, initialize the chart and call the `update` method whenever the data changes: javascript // 1. Select the container const container =
+### 3. Initialize & Update In your JavaScript file, initialize the chart and call the `update` method whenever the data changes:
 
 ```javascript
 // 1. Select the container
@@ -61,3 +59,11 @@ setInterval(() => {
 // to avoid memory leaks
 // myGauge.destroy();
 ```
+
+## ⚙️ Customization
+
+To change styles (colors, stroke widths, fonts, etc.), simply find the `CONFIG` object inside the `d3-animated-gauge.js` file and modify the values to match your design requirements.
+
+## 📄 License
+
+This project is licensed under the MIT License. Feel free to use and modify it.
