@@ -98,8 +98,6 @@ const CONFIG = {
   fontFamily: "system-ui",
 };
 
-//colors
-
 export function createGaugeChart(containerSelector, title, unit, minMax, initialValue = null, config = CONFIG) {
   const mergedConfig = { ...CONFIG, ...config };
   let min = minMax.min;

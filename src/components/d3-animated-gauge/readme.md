@@ -22,41 +22,74 @@ You can view, interact with, and fork the live code on Observable HQ:
 
 ## 💻 How to Use
 
-### 1. Include the Scripts
+You can easily use this chart in both modern module bundlers (React, Vite, etc.) and plain HTML files.
 
-```html
-<!-- D3.js -->
-<script src="https://d3js.org/d3.v7.min.js"></script>
+### Option A: Modern Frameworks (Vite, React, Vue, Angular, etc.)
 
-<!-- Gauge Script from GitHub -->
-<script src="https://raw.githubusercontent.com/Dariush-Hassani/observable-charts/main/src/components/d3-animated-gauge/d3-animated-gauge.js"></script>
-```
+1. **Install D3.js** via npm:
+   npm install d3
 
-### 2. Create an HTML Container Create a `div` element with a specific width and height (or use percentages) to hold the chart:
+2. **Download** the `d3-animated-gauge.js` file from this repository and place it in your project (e.g., `src/components/`).
 
-```html
-<div id="gauge-container" style="width: 300px; height: 300px;"></div>
-```
-
-### 3. Initialize & Update
-
-In your JavaScript file, initialize the chart by passing the required parameters. You can optionally pass a `config` object to customize the appearance. If you don't pass a config object, the chart will automatically use its default styling.
+3. **Import and initialize**: Create a container element in your component and initialize the chart.
 
 ```javascript
+import { createGaugeChart } from "./path/to/d3-animated-gauge.js";
+
 // 1. Initialize the chart
 const myGauge = createGaugeChart("#gauge-container", "Speed", "KM/h", { min: 0, max: 200 }, 0, {
   outerArcColor: "#10b981", // Override specific properties only!
-  duration: 800, //...
+  duration: 800,
 });
 
 // 2. Update the chart value with animation
-myGauge.update(Math.random() * 200);
+myGauge.update(120);
 
-// 3. Cleanup (Optional but recommended to prevent memory leaks)
+// 3. Cleanup on unmount (Highly recommended)
 // myGauge.destroy();
 ```
 
-#### Parameters Overview
+### Option B: Plain HTML (No build tools)
+
+If you are using plain HTML without a bundler, you can use an `importmap` to resolve D3 from a CDN.
+
+1. **Download** `d3-animated-gauge.js` and place it in your project folder.
+2. **Add the following code** to your HTML:
+
+```html
+<!-- 1. Define importmap for D3 -->
+<script type="importmap">
+  {
+    "imports": {
+      "d3": "https://cdn.jsdelivr.net/npm/d3@7/+esm"
+    }
+  }
+</script>
+
+<!-- 2. Create the container element -->
+<div id="gauge-container" style="width: 300px; height: 300px;"></div>
+
+<!-- 3. Import and use as a module -->
+<script type="module">
+  import { createGaugeChart } from "./path/to/d3-animated-gauge.js";
+
+  // 1. Initialize the chart
+  const myGauge = createGaugeChart("#gauge-container", "Speed", "KM/h", { min: 0, max: 200 }, 0, {
+    outerArcColor: "#10b981", // Override specific properties only!
+    duration: 800,
+  });
+
+  // 2. Update the chart value with animation
+  myGauge.update(120);
+
+  // 3. Cleanup on unmount (Highly recommended)
+  // myGauge.destroy();
+</script>
+```
+
+---
+
+## 🛠 Parameters Overview
 
 1. **`containerSelector`**: The target HTML element or CSS selector (e.g., `"#gauge-container"`).
 2. **`title`**: Text displayed at the top of the gauge.
@@ -65,7 +98,7 @@ myGauge.update(Math.random() * 200);
 5. **`initialValue`**: _(Optional)_ The starting value on load. If omitted or set to `null`, it defaults to the `min` value.
 6. **`config`**: _(Optional)_ An object containing your custom styles. The chart intelligently merges your custom object with the defaults, so **you only need to include the specific variables you want to change**.
 
-#### Default Configuration (`config`)
+### Default Configuration (`config`)
 
 If you completely omit the 6th parameter, the chart applies the following default values. You can use these keys in your custom config object to tweak the design:
 
@@ -92,7 +125,6 @@ If you completely omit the 6th parameter, the chart applies the following defaul
   needleColor: "#fff",
   fontFamily: "system-ui"
 }
-
 ```
 
 ## 📄 License
