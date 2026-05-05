@@ -67,7 +67,7 @@ If you are using plain HTML without a bundler, you can use an `importmap` to res
 </script>
 
 <!-- 2. Create the container element -->
-<div id="gauge-container" style="width: 300px; height: 300px;"></div>
+<div id="gauge-container" style="width: 330px; height: 330px;"></div>
 
 <!-- 3. Import and use as a module -->
 <script type="module">
