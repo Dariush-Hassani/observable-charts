@@ -76,9 +76,9 @@ function createAnimatedValue(initialTarget, duration = 300, onChange) {
 
 //config
 const CONFIG = {
-  padding: 30,
-  nInnerTicks: 40,
-  nOuterTicks: 5,
+  padding: 40,
+  nInnerTicks: 50,
+  nOuterTicks: 10,
   ticksLength: 4,
   arcStrokeWidth: 2,
   spaceBetweenArcs: 4,
@@ -93,8 +93,9 @@ const CONFIG = {
   outerArcColor: "#ef4444",
   innerArcColor: "#0ea5e9",
   textColor: "#fff",
-  backgroundColor: "#16171d",
+  backgroundColor: "#000000",
   needleColor: "#fff",
+  outerCircleBorderColor: "#605e5e",
   fontFamily: "system-ui",
 };
 
@@ -110,22 +111,18 @@ export function createGaugeChart(containerSelector, title, unit, minMax, initial
 
   const valueScale = d3.scaleLinear().domain([min, max]).range([mergedConfig.minAngle, mergedConfig.maxAngle]);
 
-  const svg = d3
-    .select(container)
-    .append("svg")
-    .style("width", "100%")
-    .style("height", "100%")
-    .style("display", "block")
-    .style("font-family", mergedConfig.fontFamily)
-    .style("background-color", mergedConfig.backgroundColor);
+  const svg = d3.select(container).append("svg").style("width", "100%").style("height", "100%").style("display", "block").style("font-family", mergedConfig.fontFamily);
   let radius = 0;
 
   const g = svg.append("g");
-  const outerGroup = g.append("g").attr("transform", `translate(${radius},${radius})`);
+
+  const bgGroup = g.append("g");
+  const bgCirlcle = bgGroup.append("circle").attr("stroke", mergedConfig.outerCircleBorderColor).style("fill", mergedConfig.backgroundColor);
+  const outerGroup = g.append("g");
   const outerArcPath = outerGroup.append("path").style("fill", mergedConfig.outerArcColor);
   const outerTicksGroup = outerGroup.append("g");
 
-  const innerGroup = g.append("g").attr("transform", `translate(${radius},${radius})`);
+  const innerGroup = g.append("g");
   const innerArcPath = innerGroup.append("path").style("fill", mergedConfig.innerArcColor);
   const innerTicksGroup = innerGroup.append("g");
 
@@ -212,6 +209,9 @@ export function createGaugeChart(containerSelector, title, unit, minMax, initial
       outer: radius - mergedConfig.padding - mergedConfig.spaceBetweenArcs,
     };
 
+    bgCirlcle.attr("r", outerRadius.outer + 28);
+
+    bgGroup.attr("transform", `translate(${radius},${radius})`);
     outerGroup.attr("transform", `translate(${radius},${radius})`);
     innerGroup.attr("transform", `translate(${radius},${radius})`);
     textGroup.attr("transform", `translate(${radius},${radius + radius - mergedConfig.padding - 2 * mergedConfig.arcStrokeWidth - mergedConfig.spaceBetweenArcs - 2 * mergedConfig.ticksLength})`);
