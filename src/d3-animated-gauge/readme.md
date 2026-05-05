@@ -2,7 +2,7 @@
 
 A beautiful, responsive, and fully animated gauge chart built with **D3.js** and Vanilla JavaScript. It has no framework dependencies and automatically adapts to its parent container's size using `ResizeObserver`.
 
-![D3 Animated Gauge Chart](https://raw.githubusercontent.com/Dariush-Hassani/observable-charts/refs/heads/main/public/d3-animated-gauge.gif)
+![D3 Animated Gauge Chart](https://raw.githubusercontent.com/Dariush-Hassani/observable-charts/refs/heads/main/public/d3-animated-gauge-2.gif)
 
 ## 🚀 Live Demo
 
