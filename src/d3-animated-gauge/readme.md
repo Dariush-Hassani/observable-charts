@@ -110,9 +110,9 @@ If you completely omit the 6th parameter, the chart applies the following defaul
 
 ```javascript
 {
-  padding: 30,
-  nInnerTicks: 40,
-  nOuterTicks: 5,
+  padding: 40,
+  nInnerTicks: 50,
+  nOuterTicks: 10,
   ticksLength: 4,
   arcStrokeWidth: 2,
   spaceBetweenArcs: 4,
@@ -127,8 +127,9 @@ If you completely omit the 6th parameter, the chart applies the following defaul
   outerArcColor: "#ef4444",
   innerArcColor: "#0ea5e9",
   textColor: "#fff",
-  backgroundColor: "#16171d",
+  backgroundColor: "#000000",
   needleColor: "#fff",
+  outerCircleBorderColor: "#605e5e",
   fontFamily: "system-ui",
 }
 ```
