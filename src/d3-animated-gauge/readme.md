@@ -98,8 +98,8 @@ If you are using plain HTML without a bundler, you can use an `importmap` to res
 ## 🛠 Parameters Overview
 
 1. **`containerSelector`**: The target HTML element or CSS selector (e.g., `"#gauge-container"`).
-2. **`title`**: Text displayed at the top of the gauge.
-3. **`unit`**: Measurement unit displayed below the value.
+2. **`title`**: Text displayed at the top of the gauge value.
+3. **`unit`**: Measurement unit displayed below the gauge value.
 4. **`minMax`**: An object `{ min, max }` defining the lowest and highest values of the gauge.
 5. **`initialValue`**: _(Optional)_ The starting value on load. If omitted or set to `null`, it defaults to the `min` value.
 6. **`config`**: _(Optional)_ An object containing your custom styles. The chart intelligently merges your custom object with the defaults, so **you only need to include the specific variables you want to change**.
