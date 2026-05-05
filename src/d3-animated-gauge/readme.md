@@ -31,7 +31,13 @@ You can easily use this chart in both modern module bundlers (React, Vite, etc.)
 
 2. **Download** the `d3-animated-gauge.js` file from this repository and place it in your project (e.g., `src/components/`).
 
-3. **Import and initialize**: Create a container element in your component and initialize the chart.
+3. **Add container** to your HTML (or JSX).
+
+```html
+<div id="gauge-container" style="width: 330px; height: 330px;"></div>
+```
+
+4. **Import and initialize**: Create a container element in your component and initialize the chart.
 
 ```javascript
 import { createGaugeChart } from "./path/to/d3-animated-gauge.js";
