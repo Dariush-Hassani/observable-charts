@@ -114,16 +114,16 @@ If you completely omit the 6th parameter, the chart applies the following defaul
   needleTailLength: 15,
   needleStrokeWidth: 2,
   needleCircleRadius: 5,
-  minAngle: (-3 _ Math.PI) / 4, // Start angle
-  maxAngle: (3 _ Math.PI) / 4, // End angle
-  decimal: 0, // Number of decimal places
-  duration: 500, // Animation duration in ms
+  minAngle: (-3 * Math.PI) / 4,
+  maxAngle: (3 * Math.PI) / 4,
+  decimal: 0,
+  duration: 500,
   outerArcColor: "#ef4444",
   innerArcColor: "#0ea5e9",
   textColor: "#fff",
   backgroundColor: "#16171d",
   needleColor: "#fff",
-  fontFamily: "system-ui"
+  fontFamily: "system-ui",
 }
 ```
 
