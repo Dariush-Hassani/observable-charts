@@ -1,17 +1,36 @@
 {
   "name": "cockpit-charts",
-  "version": "0.0.0",
-  "private": true,
+  "version": "1.0.0",
   "type": "module",
+  "main": "./dist/cockpit-charts.umd.cjs",
+  "module": "./dist/cockpit-charts.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/cockpit-charts.js",
+      "require": "./dist/cockpit-charts.umd.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^8.0.10"
+    "@tailwindcss/vite": "^4.2.4",
+    "@types/d3-scale": "^4.0.9",
+    "@types/d3-selection": "^3.0.11",
+    "@types/node": "^25.6.0",
+    "tailwindcss": "^4.2.4",
+    "vite": "^8.0.10",
+    "vite-plugin-dts": "^5.0.0"
   },
   "dependencies": {
-    "d3": "^7.9.0"
+    "d3-scale": "^4.0.2",
+    "d3-selection": "^3.0.0"
   }
 }
