@@ -27,8 +27,10 @@ export interface AirSpeedStyleConfigModel {
   fontFamily?: string;
   // Title & Unit
   titleFontSize?: number;
+  titleFontWeight?: number;
   titleFontColor?: string;
   unitFontSize?: number;
+  unitFontWeight?: number;
   unitFontColor?: string;
 
   // Main Ribbon
@@ -38,22 +40,37 @@ export interface AirSpeedStyleConfigModel {
   // Center Box (Current Speed Indicator)
   centerBoxBgColor?: string;
   centerBoxStrokeColor?: string; // Added border color for the center box
-  centerBoxFontSize?: number;
-  centerBoxFontColor?: string;
+  centerBoxValueFontSize?: number;
+  centerBoxValueFontWeight?: number;
+  centerBoxValueFontColor?: string;
+  centerBoxUnitFontSize?: number;
+  centerBoxUnitFontWeight?: number;
+  centerBoxUnitFontColor?: string;
   centerBoxHeight?: number;
+  rectangleMarkerSize?: number;
+  rectangleMarkerBgColor?: string;
+  centerBoxOpacity?: number;
+  //Total extra width of the center box compared to the main ribbon width (in pixels).
+  //For example, a value of 4 means the center box will extend 2px to the left and 2px to the right of the ribbon.
+  centerBoxExtraWidth?: number;
 
   // Ticks & Labels
   majorTickLength?: number;
   minorTickLength?: number;
   tickColor?: string;
   tickLabelFontSize?: number;
+  tickLabelFontWeight?: number;
 
   // V-Speeds (Side Ribbon)
   colorBandWidth?: number;
   ribbonGap?: number;
   vSpeedMarkerSize?: number;
+  vSpeedMarkerStrokeWidth?: number;
+  vSpeedMarkerHasBg?: boolean;
   vSpeedLabelFontSize?: number;
+  vSpeedLabelFontWeight?: number;
   vSpeedValueFontSize?: number;
+  vSpeedValueFontWeight?: number;
   markerGap?: number;
 }
 

@@ -12,35 +12,50 @@ export const baseTickConfig: AirSpeedTickConfigModel = {
 
 // Base styling configuration for the chart's appearance
 export const baseStyleConfig: Required<AirSpeedStyleConfigModel> = {
-  fontFamily: "monospace",
+  fontFamily: "system-ui",
   // Title and Unit
   titleFontSize: 18,
+  titleFontWeight: 600,
   titleFontColor: "#FFFFFF",
   unitFontSize: 16,
+  unitFontWeight: 600,
   unitFontColor: "#12bcd9",
 
   // Main Background Ribbon
-  mainRibbonWidth: 120,
-  mainRibbonBgColor: "rgba(40, 40, 40, 0.8)", // Dark gray with slight transparency
+  mainRibbonWidth: 140,
+  mainRibbonBgColor: "#141415", // Dark gray with slight transparency
 
   // Center Box (Current Speed Indicator)
   centerBoxBgColor: "#000000",
   centerBoxStrokeColor: "#FFFFFF", // White stroke/border for the center box
-  centerBoxFontSize: 28,
-  centerBoxFontColor: "#FFFFFF",
-  centerBoxHeight: 50,
+  centerBoxValueFontSize: 36,
+  centerBoxValueFontWeight: 700,
+  centerBoxValueFontColor: "#FFFFFF",
+  centerBoxUnitFontSize: 12,
+  centerBoxUnitFontWeight: 700,
+  centerBoxUnitFontColor: "#12bcd9",
+  centerBoxHeight: 80,
+  centerBoxExtraWidth: 20,
+  centerBoxOpacity: 0.9,
+  rectangleMarkerBgColor: "#FFFFFF",
+  rectangleMarkerSize: 16,
 
   // Ticks and Scale Labels
   majorTickLength: 30,
   minorTickLength: 15,
-  tickColor: "#FFFFFF",
-  tickLabelFontSize: 20,
+  tickColor: "#C3CCCF",
+  tickLabelFontSize: 22,
+  tickLabelFontWeight: 400,
 
   // V-Speeds Color Bands and Markers
-  colorBandWidth: 10, // Width of the color bands (green, white, etc.)
-  ribbonGap: 4, // Gap between the main ribbon and color bands
-  vSpeedMarkerSize: 12, // Size of the V-Speed markers
-  vSpeedLabelFontSize: 12, // Font size for V-Speed labels (e.g., Vne)
-  vSpeedValueFontSize: 12, // Font size for V-Speed values (if displayed)
-  markerGap: 5, //Space between marker and color ribbon
+  colorBandWidth: 20,
+  ribbonGap: 10,
+  vSpeedMarkerSize: 20,
+  vSpeedMarkerStrokeWidth: 2,
+  vSpeedMarkerHasBg: false,
+  vSpeedLabelFontSize: 14,
+  vSpeedLabelFontWeight: 600,
+  vSpeedValueFontSize: 18,
+  vSpeedValueFontWeight: 600,
+  markerGap: 4, //Space between marker and color ribbon
 };

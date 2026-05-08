@@ -5,23 +5,23 @@ export const baseConfig: AirspeedConfigModel = {
   title: "AIRSPEED",
   unit: "KNOTS",
   minSpeed: 0,
-  maxSpeed: 200,
+  maxSpeed: 250,
   visibleRange: 80, // Shows 40 knots above and 40 knots below the center
   colorBands: [
-    { min: 40, max: 85, color: "#FFFFFF" }, // White arc (Flap operating range)
-    { min: 48, max: 129, color: "#00FF00" }, // Green arc (Normal operating range)
-    { min: 129, max: 163, color: "#FFFF00" }, // Yellow arc (Caution range)
+    { min: 40, max: 85, color: "#FFFFFF" }, // White (Flap operating range)
+    { min: 85, max: 130, color: "#389D24" }, // Green (Normal operating range)
+    { min: 130, max: 160, color: "#EDC427" }, // Yellow (Caution range)
+    { min: 160, max: 250, color: "#B92528" }, // Red (Danger range)
   ],
   vSpeeds: [
-    { speed: 85, label: "Vfe", color: "#FFFFFF" },
-    { speed: 129, label: "Vno", color: "#FFFF00" },
-    { speed: 163, label: "Vne", color: "#FF0000" }, // Red line
+    { speed: 80, label: "Vfe", color: "#FFFFFF" },
+    { speed: 150, label: "Vno", color: "#EDC427" },
+    { speed: 180, label: "Vne", color: "#B92528" },
+    { speed: 120, label: "Vs", color: "#389D24" },
   ],
-  initialValue: {
-    airSpeed: 160,
-  },
 };
 let x = airSpeedIndicator("#air-speed-chart", baseConfig, {}, {});
+x.update({ airSpeed: 160 });
 
 setTimeout(() => {
   x.update({
@@ -31,6 +31,18 @@ setTimeout(() => {
 
 setTimeout(() => {
   x.update({
-    airSpeed: 160,
+    airSpeed: 120,
   });
 }, 2000);
+
+setTimeout(() => {
+  x.update({
+    airSpeed: 150,
+  });
+}, 3000);
+
+setTimeout(() => {
+  x.update({
+    airSpeed: 170,
+  });
+}, 4000);
