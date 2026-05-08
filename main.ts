@@ -1,7 +1,7 @@
 import { airSpeedIndicator } from "./air-speed-indicator";
-import type { AirspeedConfigModel } from "./air-speed-indicator/model";
+import type { AirSpeedConfigModel } from "./air-speed-indicator/model";
 import "./style.css";
-export const baseConfig: AirspeedConfigModel = {
+const baseConfig: AirSpeedConfigModel = {
   title: "AIRSPEED",
   unit: "KNOTS",
   minSpeed: 0,
@@ -20,12 +20,12 @@ export const baseConfig: AirspeedConfigModel = {
     { speed: 120, label: "Vs", color: "#389D24" },
   ],
 };
-let x = airSpeedIndicator("#air-speed-chart", baseConfig, {}, {});
+let x = airSpeedIndicator("#air-speed-chart", baseConfig);
 x.update({ airSpeed: 160 });
 
 setTimeout(() => {
   x.update({
-    airSpeed: 100,
+    airSpeed: 550,
   });
 }, 1000);
 

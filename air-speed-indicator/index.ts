@@ -1,16 +1,15 @@
 import { select } from "d3-selection";
 import { range } from "d3-array";
 import { baseStyleConfig, baseTickConfig } from "./base-config";
-import type { AirspeedConfigModel, AirspeedStateModel, AirSpeedStyleConfigModel, AirSpeedTickConfigModel, AirSpeedVSpeedMarkerModel } from "./model";
+import type { AirSpeedConfigModel, AirSpeedStateModel, AirSpeedStyleConfigModel, AirSpeedTickConfigModel, AirSpeedVSpeedMarkerModel } from "./model";
 import { scaleLinear } from "d3-scale";
-import { baseConfig } from "../main";
 import { createAnimatedValue } from "../lib/animation-helpers";
 import { symbol, symbolTriangle } from "d3-shape";
 import { getTriangleAreaFromSide } from "../lib/math-helpers";
 
 export const airSpeedIndicator = (
   containerSelector: string,
-  chartConfig: AirspeedConfigModel,
+  chartConfig: AirSpeedConfigModel,
   ticksConfig: AirSpeedTickConfigModel = baseTickConfig,
   stylesConfig: AirSpeedStyleConfigModel = baseStyleConfig,
 ) => {
@@ -19,11 +18,35 @@ export const airSpeedIndicator = (
 
   const clipId = `air-speed-clip-${(Math.random() * 10000).toFixed(0)}`;
 
+  // 1. Container Validation
   const container = select(containerSelector).node();
-  if (!container) throw new Error("Container element not found!");
+  if (!container) throw new Error(`AirSpeedIndicator: Container element '${containerSelector}' not found!`);
 
-  let currentData: AirspeedStateModel = baseConfig.initialValue
-    ? baseConfig.initialValue
+  // 2. Config Validation
+  if (chartConfig.minSpeed >= chartConfig.maxSpeed) {
+    throw new Error("AirSpeedIndicator: 'minSpeed' must be strictly less than 'maxSpeed'.");
+  }
+
+  if (chartConfig.visibleRange <= 0 || chartConfig.visibleRange > chartConfig.maxSpeed - chartConfig.minSpeed) {
+    throw new Error("AirSpeedIndicator: 'visibleRange' must be greater than 0 and less than or equal to the total speed range.");
+  }
+
+  // 3. Color Bands Validation (Optional but recommended)
+  chartConfig.colorBands?.forEach((band, index) => {
+    if (band.min >= band.max) {
+      console.warn(`AirSpeedIndicator: Color band at index ${index} has invalid range (min: ${band.min}, max: ${band.max}).`);
+    }
+  });
+
+  // 4. Warning for out-of-bounds initial value
+  if (chartConfig.initialValue) {
+    if (chartConfig.initialValue.airSpeed < chartConfig.minSpeed || chartConfig.initialValue.airSpeed > chartConfig.maxSpeed) {
+      console.warn(`AirSpeedIndicator: 'initialValue.airSpeed' (${chartConfig.initialValue.airSpeed}) is out of the chart's min/max bounds.`);
+    }
+  }
+
+  let currentData: AirSpeedStateModel = chartConfig.initialValue
+    ? chartConfig.initialValue
     : {
         airSpeed: chartConfig.minSpeed,
       };
@@ -124,7 +147,7 @@ export const airSpeedIndicator = (
     .attr("y", 0)
     .style("dominant-baseline", "hanging")
     .style("text-anchor", "middle")
-    .text(baseConfig.unit);
+    .text(chartConfig.unit);
   //--------CenterBox--------
 
   //--------Title--------
@@ -158,12 +181,33 @@ export const airSpeedIndicator = (
     centerBoxValueText.text(currentData.airSpeed);
   };
 
-  const update = (newData: AirspeedStateModel, animate: boolean = true) => {
+  const update = (newData: AirSpeedStateModel, animate: boolean = true) => {
     currentData = newData;
+    // 1. Type & NaN Validation
+    if (!newData || typeof newData.airSpeed !== "number" || isNaN(newData.airSpeed)) {
+      console.warn("AirSpeedIndicator: Received invalid 'airSpeed'. Update skipped.");
+      return;
+    }
+
+    // 2. Clamping Out-of-bounds Speed
+    let safeAirSpeed = Math.max(chartConfig.minSpeed, Math.min(chartConfig.maxSpeed, newData.airSpeed));
+    currentData.airSpeed = safeAirSpeed;
+
+    if (newData.airSpeed !== safeAirSpeed) {
+      console.debug(`AirSpeedIndicator: Airspeed (${newData.airSpeed}) clamped to ${safeAirSpeed}.`);
+    }
+
+    // 3. Validation for Optional Data (Target Speed / Trend)
+    if (newData.targetSpeed !== undefined) {
+      if (typeof newData.targetSpeed !== "number" || isNaN(newData.targetSpeed)) {
+        console.warn("AirSpeedIndicator: Invalid 'targetSpeed'. Ignored.");
+        newData.targetSpeed = undefined;
+      }
+    }
 
     if (animate) {
       if (!airSpeedAnimation) {
-        airSpeedAnimation = createAnimatedValue(baseConfig.initialValue ? baseConfig.initialValue.airSpeed : baseConfig.minSpeed, 500, (value) => {
+        airSpeedAnimation = createAnimatedValue(chartConfig.initialValue ? chartConfig.initialValue.airSpeed : chartConfig.minSpeed, 500, (value) => {
           currentData.airSpeed = parseInt(value.toFixed(0));
           performUpdate();
         });
@@ -184,14 +228,14 @@ export const airSpeedIndicator = (
 
     //--------Set title and unit--------
     titleGroup.attr("transform", `translate(${centerX},0)`);
-    titleText.text(baseConfig.title);
-    unitText.text(baseConfig.unit).attr("y", titleText.node()?.getBBox().height ?? 0);
+    titleText.text(chartConfig.title);
+    unitText.text(chartConfig.unit).attr("y", titleText.node()?.getBBox().height ?? 0);
     //--------Set title and unit--------
 
     //--------Calculating dimensions stpe2--------
     paddingTop = (titleGroup.node()?.getBBox().height ?? 0) + 5;
     effectiveHeight = svgHeight - paddingTop;
-    ribbonHeight = ((baseConfig.maxSpeed - baseConfig.minSpeed) * effectiveHeight) / baseConfig.visibleRange;
+    ribbonHeight = ((chartConfig.maxSpeed - chartConfig.minSpeed) * effectiveHeight) / chartConfig.visibleRange;
 
     valueScale.domain([chartConfig.minSpeed, chartConfig.maxSpeed]).range([ribbonHeight, 0]);
     //--------Calculating dimensions stpe2--------
@@ -207,7 +251,7 @@ export const airSpeedIndicator = (
     //--------Color ribbon--------
     colorRibbonGroup
       .selectAll("rect.color-ribbon")
-      .data(baseConfig.colorBands)
+      .data(chartConfig.colorBands)
       .join(
         (enter) => {
           return enter
@@ -231,7 +275,7 @@ export const airSpeedIndicator = (
     //--------VspeedMarker--------
     vSpeedMarkerGroup
       .selectAll("path.v-marker")
-      .data(baseConfig.vSpeeds)
+      .data(chartConfig.vSpeeds)
       .join(
         (enter) => {
           return enter
@@ -251,7 +295,7 @@ export const airSpeedIndicator = (
     //--------VspeedLabel--------
     vSpeedLabelGroup
       .selectAll("g.v-label")
-      .data(baseConfig.vSpeeds)
+      .data(chartConfig.vSpeeds)
       .join(
         (enter) => {
           let labelGroup = enter.append("g").attr("class", "v-label");
@@ -297,7 +341,7 @@ export const airSpeedIndicator = (
     //--------Major Ticks--------
     majorTicksGroup
       .selectAll("g.major-ticks")
-      .data(range(baseConfig.minSpeed, baseConfig.maxSpeed + mergedTicksConfig.majorInterval, mergedTicksConfig.majorInterval))
+      .data(range(chartConfig.minSpeed, chartConfig.maxSpeed + mergedTicksConfig.majorInterval, mergedTicksConfig.majorInterval))
       .join(
         (enter) => {
           let majorTicksInnerGroup = enter
@@ -332,7 +376,7 @@ export const airSpeedIndicator = (
     //--------Major Ticks--------
 
     //--------Minor Ticks--------
-    const minorTicksData = range(baseConfig.minSpeed, baseConfig.maxSpeed, mergedTicksConfig.majorInterval / mergedTicksConfig.minorSubdivisions).filter(
+    const minorTicksData = range(chartConfig.minSpeed, chartConfig.maxSpeed, mergedTicksConfig.majorInterval / mergedTicksConfig.minorSubdivisions).filter(
       (d) => d % mergedTicksConfig.majorInterval !== 0,
     );
     minorTicksGroup
