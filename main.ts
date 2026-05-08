@@ -17,5 +17,20 @@ export const baseConfig: AirspeedConfigModel = {
     { speed: 129, label: "Vno", color: "#FFFF00" },
     { speed: 163, label: "Vne", color: "#FF0000" }, // Red line
   ],
+  initialValue: {
+    airSpeed: 160,
+  },
 };
 let x = airSpeedIndicator("#air-speed-chart", baseConfig, {}, {});
+
+setTimeout(() => {
+  x.update({
+    airSpeed: 100,
+  });
+}, 1000);
+
+setTimeout(() => {
+  x.update({
+    airSpeed: 160,
+  });
+}, 2000);

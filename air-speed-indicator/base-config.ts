@@ -2,13 +2,7 @@
 // 4. Base Configuration Example (Mock Data)
 // ==========================================
 
-import type { AirspeedStateModel, AirSpeedStyleConfigModel, AirSpeedTickConfigModel } from "./model";
-
-// Example State for testing
-export const mockState: AirspeedStateModel = {
-  ias: 110,
-  targetSpeed: 120,
-};
+import type { AirSpeedStyleConfigModel, AirSpeedTickConfigModel } from "./model";
 
 // Base configuration for ticks (scale lines)
 export const baseTickConfig: AirSpeedTickConfigModel = {

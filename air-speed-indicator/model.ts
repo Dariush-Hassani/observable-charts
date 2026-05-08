@@ -70,10 +70,11 @@ export interface AirspeedConfigModel {
   visibleRange: number; // How much speed range is visible in the viewport (e.g., 80)
   colorBands: AirSpeedColorBandModel[]; // Array of colored arcs/bands
   vSpeeds: AirSpeedVSpeedMarkerModel[]; // Array of specific speed limits and labels
+  initialValue?: AirspeedStateModel; //The starting value on load. If omitted, it defaults to the `min` value.
 }
 
 // Used frequently (e.g., 60fps) to update the dynamic parts
 export interface AirspeedStateModel {
-  ias: number; // Indicated Airspeed (moves the tape and updates center box)
+  airSpeed: number; // Airspeed (moves the tape and updates center box)
   targetSpeed?: number; // Speed bug target (optional)
 }
