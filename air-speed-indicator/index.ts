@@ -3,9 +3,8 @@ import { range } from "d3-array";
 import { baseStyleConfig, baseTickConfig } from "./base-config";
 import type { AirSpeedConfigModel, AirSpeedStateModel, AirSpeedStyleConfigModel, AirSpeedTickConfigModel, AirSpeedVSpeedMarkerModel } from "./model";
 import { scaleLinear } from "d3-scale";
-import { createAnimatedValue } from "../lib/animation-helpers";
 import { symbol, symbolTriangle } from "d3-shape";
-import { getTriangleAreaFromSide } from "../lib/math-helpers";
+import { clamped, createAnimatedValue, getTriangleAreaFromSide } from "../lib/helpers";
 
 export const airSpeedIndicator = (
   containerSelector: string,
@@ -91,10 +90,19 @@ export const airSpeedIndicator = (
   const mainRibbonGroup = ribonClipPathGroup.append("g").attr("class", `main-ribbon-group`);
   const mainRibbonRect = mainRibbonGroup
     .append("rect")
-    .attr("x", "0")
+    .attr("x", 0)
+    .attr("y", 0)
     .attr("width", mergedStylesConfig.mainRibbonWidth)
     .style("fill", mergedStylesConfig.mainRibbonBgColor)
     .attr("class", `main-ribbon-bg`);
+  const mainRibbonLeftLine = mainRibbonGroup.append("line").attr("x1", 0).attr("x2", 0).attr("y1", 0).attr("stroke", mergedStylesConfig.mainRibbonStrokeColor);
+  const mainRibbonRightLine = mainRibbonGroup
+    .append("line")
+    .attr("x1", mergedStylesConfig.mainRibbonWidth)
+    .attr("x2", mergedStylesConfig.mainRibbonWidth)
+    .attr("y1", 0)
+    .attr("stroke-width", 2)
+    .attr("stroke", mergedStylesConfig.mainRibbonStrokeColor);
   //--------MainRibbon--------
 
   //--------Ticks--------
@@ -190,7 +198,7 @@ export const airSpeedIndicator = (
     }
 
     // 2. Clamping Out-of-bounds Speed
-    let safeAirSpeed = Math.max(chartConfig.minSpeed, Math.min(chartConfig.maxSpeed, newData.airSpeed));
+    let safeAirSpeed = clamped(chartConfig.minSpeed, chartConfig.maxSpeed, newData.airSpeed);
     currentData.airSpeed = safeAirSpeed;
 
     if (newData.airSpeed !== safeAirSpeed) {
@@ -245,7 +253,9 @@ export const airSpeedIndicator = (
     //--------ClipPath--------
 
     //--------Main ribbon--------
-    mainRibbonRect.attr("height", ribbonHeight).attr("y", 0);
+    mainRibbonRect.attr("height", ribbonHeight);
+    mainRibbonLeftLine.attr("y2", ribbonHeight);
+    mainRibbonRightLine.attr("y2", ribbonHeight);
     //--------Main ribbon--------
 
     //--------Color ribbon--------

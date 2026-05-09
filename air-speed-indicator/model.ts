@@ -36,6 +36,7 @@ export interface AirSpeedStyleConfigModel {
   // Main Ribbon
   mainRibbonWidth?: number;
   mainRibbonBgColor?: string;
+  mainRibbonStrokeColor?: string;
 
   // Center Box (Current Speed Indicator)
   centerBoxBgColor?: string;

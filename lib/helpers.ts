@@ -58,3 +58,11 @@ export function createAnimatedValue(initialTarget: number, duration = 300, onCha
     getValue,
   };
 }
+
+export function getTriangleAreaFromSide(sideLength: number): number {
+  return (Math.sqrt(3) / 4) * Math.pow(sideLength, 2);
+}
+
+export function clamped(min: number, max: number, value: number): number {
+  return Math.min(Math.max(value, min), max);
+}

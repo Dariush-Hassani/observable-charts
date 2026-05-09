@@ -23,11 +23,12 @@ export const baseStyleConfig: Required<AirSpeedStyleConfigModel> = {
 
   // Main Background Ribbon
   mainRibbonWidth: 140,
-  mainRibbonBgColor: "#141415", // Dark gray with slight transparency
+  mainRibbonBgColor: "transparent",
+  mainRibbonStrokeColor: "#FFFFFF",
 
   // Center Box (Current Speed Indicator)
   centerBoxBgColor: "#000000",
-  centerBoxStrokeColor: "#FFFFFF", // White stroke/border for the center box
+  centerBoxStrokeColor: "#FFFFFF",
   centerBoxValueFontSize: 36,
   centerBoxValueFontWeight: 700,
   centerBoxValueFontColor: "#FFFFFF",
@@ -48,11 +49,11 @@ export const baseStyleConfig: Required<AirSpeedStyleConfigModel> = {
   tickLabelFontWeight: 400,
 
   // V-Speeds Color Bands and Markers
-  colorBandWidth: 20,
-  ribbonGap: 10,
-  vSpeedMarkerSize: 20,
+  colorBandWidth: 10,
+  ribbonGap: 10, //Space between main ribbon and color ribbon
+  vSpeedMarkerSize: 15,
   vSpeedMarkerStrokeWidth: 2,
-  vSpeedMarkerHasBg: false,
+  vSpeedMarkerHasBg: true,
   vSpeedLabelFontSize: 14,
   vSpeedLabelFontWeight: 600,
   vSpeedValueFontSize: 18,
