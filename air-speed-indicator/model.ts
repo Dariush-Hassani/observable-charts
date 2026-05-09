@@ -94,5 +94,4 @@ export interface AirSpeedConfigModel {
 // Used frequently (e.g., 60fps) to update the dynamic parts
 export interface AirSpeedStateModel {
   airSpeed: number; // AirSpeed (moves the tape and updates center box)
-  targetSpeed?: number; // Speed bug target (optional)
 }

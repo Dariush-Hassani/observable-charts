@@ -79,7 +79,6 @@ export const airSpeedIndicator = (
   //--------VspeedMarker--------
   const vSpeedLabelGroup = ribonClipPathGroup.append("g").attr("class", `v-speed-label-group`);
   const vSpeedMarkerGroup = ribonClipPathGroup.append("g").attr("class", `v-speed-marker-group`);
-  const speedBugGroup = svg.append("g").attr("class", `speed-bug-group`);
   //--------VspeedMarker--------
 
   //--------ColorRibbin--------
@@ -172,20 +171,27 @@ export const airSpeedIndicator = (
     .style("fill", mergedStylesConfig.unitFontColor);
   //--------Title--------
 
-  const performUpdate = () => {
-    let targetY = effectiveHeight / 2;
-    let currentY = valueScale(currentData.airSpeed);
-    let newY = paddingTop + (targetY - currentY);
-    mainRibbonGroup.attr("transform", `translate(${centerX - mergedStylesConfig.mainRibbonWidth / 2},${newY})`);
-    colorRibbonGroup.attr("transform", `translate(${centerX - (mergedStylesConfig.mainRibbonWidth / 2 + mergedStylesConfig.ribbonGap + mergedStylesConfig.colorBandWidth)},${newY})`);
-    vSpeedMarkerGroup.attr(
-      "transform",
-      `translate(${centerX - (mergedStylesConfig.mainRibbonWidth / 2 + mergedStylesConfig.ribbonGap + mergedStylesConfig.colorBandWidth + mergedStylesConfig.markerGap)},${newY})`,
-    );
-    vSpeedLabelGroup.attr(
-      "transform",
-      `translate(${centerX - (mergedStylesConfig.mainRibbonWidth / 2 + mergedStylesConfig.ribbonGap + mergedStylesConfig.colorBandWidth + mergedStylesConfig.markerGap + mergedStylesConfig.vSpeedMarkerSize + mergedStylesConfig.markerGap)},${newY})`,
-    );
+  const performAirSpeedUpdate = () => {
+    let centerY = effectiveHeight / 2;
+    let airSpeedY = valueScale(currentData.airSpeed);
+    let airSpeedTargetY = paddingTop + (centerY - airSpeedY);
+
+    const mainX = centerX - mergedStylesConfig.mainRibbonWidth / 2;
+    const colorX = centerX - (mergedStylesConfig.mainRibbonWidth / 2 + mergedStylesConfig.ribbonGap + mergedStylesConfig.colorBandWidth);
+    const markerX = centerX - (mergedStylesConfig.mainRibbonWidth / 2 + mergedStylesConfig.ribbonGap + mergedStylesConfig.colorBandWidth + mergedStylesConfig.markerGap);
+    const labelX =
+      centerX -
+      (mergedStylesConfig.mainRibbonWidth / 2 +
+        mergedStylesConfig.ribbonGap +
+        mergedStylesConfig.colorBandWidth +
+        mergedStylesConfig.markerGap +
+        mergedStylesConfig.vSpeedMarkerSize +
+        mergedStylesConfig.markerGap);
+
+    mainRibbonGroup.attr("transform", `translate(${mainX},${airSpeedTargetY})`);
+    colorRibbonGroup.attr("transform", `translate(${colorX},${airSpeedTargetY})`);
+    vSpeedMarkerGroup.attr("transform", `translate(${markerX},${airSpeedTargetY})`);
+    vSpeedLabelGroup.attr("transform", `translate(${labelX},${airSpeedTargetY})`);
     centerBoxValueText.text(currentData.airSpeed);
   };
 
@@ -205,24 +211,14 @@ export const airSpeedIndicator = (
       console.debug(`AirSpeedIndicator: Airspeed (${newData.airSpeed}) clamped to ${safeAirSpeed}.`);
     }
 
-    // 3. Validation for Optional Data (Target Speed / Trend)
-    if (newData.targetSpeed !== undefined) {
-      if (typeof newData.targetSpeed !== "number" || isNaN(newData.targetSpeed)) {
-        console.warn("AirSpeedIndicator: Invalid 'targetSpeed'. Ignored.");
-        newData.targetSpeed = undefined;
-      }
-    }
-
     if (animate) {
       if (!airSpeedAnimation) {
         airSpeedAnimation = createAnimatedValue(chartConfig.initialValue ? chartConfig.initialValue.airSpeed : chartConfig.minSpeed, 500, (value) => {
           currentData.airSpeed = parseInt(value.toFixed(0));
-          performUpdate();
+          performAirSpeedUpdate();
         });
       }
-      airSpeedAnimation.setTarget(newData.airSpeed);
-    } else {
-      performUpdate();
+      airSpeedAnimation.setTarget(currentData.airSpeed);
     }
   };
 
@@ -344,10 +340,6 @@ export const airSpeedIndicator = (
       );
     //--------VspeedLabel--------
 
-    //--------Speed bug--------
-    speedBugGroup.attr("transform", `translate(${centerX + mergedStylesConfig.mainRibbonWidth / 2 + mergedStylesConfig.markerGap},0)`);
-    //--------Speed bug--------
-
     //--------Major Ticks--------
     majorTicksGroup
       .selectAll("g.major-ticks")
@@ -441,6 +433,7 @@ export const airSpeedIndicator = (
     if (airSpeedAnimation) {
       airSpeedAnimation.destroy();
     }
+
     resizeObserver.disconnect();
     select(container).html("");
   }
