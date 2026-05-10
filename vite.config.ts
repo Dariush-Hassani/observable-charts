@@ -13,7 +13,16 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       external: [/^d3-.*/],
+      output: {
+        globals: {
+          "d3-selection": "d3",
+          "d3-array": "d3",
+          "d3-scale": "d3",
+          "d3-shape": "d3",
+        },
+      },
     },
+    copyPublicDir: false,
   },
   plugins: [dts(), tailwindcss()],
 });
