@@ -1,10 +1,11 @@
 {
   "name": "cockpit-charts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "main": "./dist/cockpit-charts.umd.cjs",
   "module": "./dist/cockpit-charts.js",
   "types": "./dist/index.d.ts",
+  "repository": "https://github.com/Dariush-Hassani/cockpit-charts",
   "exports": {
     ".": {
       "import": "./dist/cockpit-charts.js",
@@ -42,5 +43,18 @@
     "d3-scale": { "optional": false },
     "d3-selection": { "optional": false },
     "d3-shape": { "optional": false }
-  }
+  },
+    "keywords": [
+    "aviation",
+    "cockpit",
+    "flight-instruments",
+    "avionics",
+    "d3",
+    "d3.js",
+    "charts",
+    "gauges",
+    "data-visualization",
+    "altimeter",
+    "airspeed"
+  ]
 }
