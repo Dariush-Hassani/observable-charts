@@ -1,7 +1,5 @@
 export function createAnimatedValue(initialTarget: number, duration = 300, onChange: (value: number) => void) {
   let current = initialTarget;
-  let prev = initialTarget;
-  let target = initialTarget;
   let rafId = 0;
 
   function setTarget(newTarget: number) {
@@ -14,7 +12,6 @@ export function createAnimatedValue(initialTarget: number, duration = 300, onCha
 
     if (from === to) return;
 
-    target = newTarget;
     const startTime = performance.now();
 
     const animate = (now: number) => {
@@ -33,7 +30,6 @@ export function createAnimatedValue(initialTarget: number, duration = 300, onCha
       if (progress < 1) {
         rafId = requestAnimationFrame(animate);
       } else {
-        prev = to;
         rafId = 0;
       }
     };

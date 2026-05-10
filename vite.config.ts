@@ -10,6 +10,7 @@ export default defineConfig({
       name: "CockpitCharts",
       fileName: "cockpit-charts",
     },
+    sourcemap: true,
     rollupOptions: {
       external: [/^d3-.*/],
     },

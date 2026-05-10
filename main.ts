@@ -19,30 +19,36 @@ const baseConfig: AirSpeedConfigModel = {
     { speed: 180, label: "Vne", color: "#B92528" },
     { speed: 120, label: "Vs", color: "#389D24" },
   ],
+  initialValue: { airSpeed: 120 },
 };
 let x = airSpeedIndicator("#air-speed-chart", baseConfig);
-x.update({ airSpeed: 160 });
-
-setTimeout(() => {
-  x.update({
-    airSpeed: 550,
-  });
-}, 1000);
-
-setTimeout(() => {
-  x.update({
-    airSpeed: 120,
-  });
-}, 2000);
 
 setTimeout(() => {
   x.update({
     airSpeed: 150,
   });
-}, 3000);
+}, 2000);
 
 setTimeout(() => {
   x.update({
     airSpeed: 170,
   });
+}, 3000);
+
+setTimeout(() => {
+  x.update({
+    airSpeed: 200,
+  });
 }, 4000);
+
+setTimeout(() => {
+  x.update({
+    airSpeed: 220,
+  });
+}, 4000);
+
+setTimeout(() => {
+  x.update({
+    airSpeed: 120,
+  });
+}, 5000);

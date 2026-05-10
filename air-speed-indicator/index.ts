@@ -94,7 +94,7 @@ export const airSpeedIndicator = (
     .attr("width", mergedStylesConfig.mainRibbonWidth)
     .style("fill", mergedStylesConfig.mainRibbonBgColor)
     .attr("class", `main-ribbon-bg`);
-  const mainRibbonLeftLine = mainRibbonGroup.append("line").attr("x1", 0).attr("x2", 0).attr("y1", 0).attr("stroke", mergedStylesConfig.mainRibbonStrokeColor);
+  const mainRibbonLeftLine = mainRibbonGroup.append("line").attr("x1", 0).attr("x2", 0).attr("y1", 0).attr("stroke", mergedStylesConfig.mainRibbonStrokeColor).attr("stroke-width", 2);
   const mainRibbonRightLine = mainRibbonGroup
     .append("line")
     .attr("x1", mergedStylesConfig.mainRibbonWidth)
@@ -192,7 +192,7 @@ export const airSpeedIndicator = (
     colorRibbonGroup.attr("transform", `translate(${colorX},${airSpeedTargetY})`);
     vSpeedMarkerGroup.attr("transform", `translate(${markerX},${airSpeedTargetY})`);
     vSpeedLabelGroup.attr("transform", `translate(${labelX},${airSpeedTargetY})`);
-    centerBoxValueText.text(currentData.airSpeed);
+    centerBoxValueText.text(Math.round(currentData.airSpeed));
   };
 
   const update = (newData: AirSpeedStateModel, animate: boolean = true) => {
@@ -205,7 +205,7 @@ export const airSpeedIndicator = (
 
     // 2. Clamping Out-of-bounds Speed
     let safeAirSpeed = clamped(chartConfig.minSpeed, chartConfig.maxSpeed, newData.airSpeed);
-    currentData.airSpeed = safeAirSpeed;
+    currentData = { airSpeed: safeAirSpeed };
 
     if (newData.airSpeed !== safeAirSpeed) {
       console.debug(`AirSpeedIndicator: Airspeed (${newData.airSpeed}) clamped to ${safeAirSpeed}.`);
@@ -213,12 +213,14 @@ export const airSpeedIndicator = (
 
     if (animate) {
       if (!airSpeedAnimation) {
-        airSpeedAnimation = createAnimatedValue(chartConfig.initialValue ? chartConfig.initialValue.airSpeed : chartConfig.minSpeed, 500, (value) => {
-          currentData.airSpeed = parseInt(value.toFixed(0));
+        airSpeedAnimation = createAnimatedValue(chartConfig.initialValue ? chartConfig.initialValue.airSpeed : chartConfig.minSpeed, mergedStylesConfig.animationDuration, (value) => {
+          currentData = { airSpeed: value };
           performAirSpeedUpdate();
         });
       }
       airSpeedAnimation.setTarget(currentData.airSpeed);
+    } else {
+      performAirSpeedUpdate();
     }
   };
 

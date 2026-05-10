@@ -25,6 +25,7 @@ export interface AirSpeedTickConfigModel {
 
 export interface AirSpeedStyleConfigModel {
   fontFamily?: string;
+  animationDuration?: number;
   // Title & Unit
   titleFontSize?: number;
   titleFontWeight?: number;

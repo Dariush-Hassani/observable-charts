@@ -13,6 +13,7 @@ export const baseTickConfig: AirSpeedTickConfigModel = {
 // Base styling configuration for the chart's appearance
 export const baseStyleConfig: Required<AirSpeedStyleConfigModel> = {
   fontFamily: "system-ui",
+  animationDuration: 500,
   // Title and Unit
   titleFontSize: 18,
   titleFontWeight: 600,
