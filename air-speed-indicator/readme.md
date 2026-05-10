@@ -8,11 +8,13 @@ A fully customizable, responsive airspeed tape chart — part of the `cockpit-ch
 
 ## Installation
 
+```bash
 npm i cockpit-charts
-
-> **Live Demo** → [View on Observable](https://observablehq.com/@dariush/air-speed-indicator)
+```
 
 ---
+
+## Live Demo -> [View on Observable](https://observablehq.com/@dariush/air-speed-indicator)
 
 ## Features
 
