@@ -14,7 +14,7 @@ npm i cockpit-charts
 
 ---
 
-## Live Demo -> [View on Observable](https://observablehq.com/@dariush/air-speed-indicator)
+👉 **[View Live Demo on Observable HQ](https://observablehq.com/@dariush/air-speed-indicator)**
 
 ## Features
 
