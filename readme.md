@@ -1,10 +1,10 @@
-![Cockpit Charts](https://raw.githubusercontent.com/Dariush-Hassani/cockpit-charts/refs/heads/main/public/all-charts.gif)
-
 # cockpit-charts
 
 A collection of highly customizable, responsive flight instrument charts for the web. Built with TypeScript and D3.js, compatible with any modern framework.
 
 ---
+
+![Cockpit Charts](https://raw.githubusercontent.com/Dariush-Hassani/cockpit-charts/refs/heads/main/public/all-charts.gif)
 
 ## Installation
 
