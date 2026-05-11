@@ -44,11 +44,13 @@ function airSpeedIndicator(
 
 ### TypeScript / Plain HTML
 
+```html
+<div id="asi-container" style="width:250px;height:600px;"></div>
+```
+
 ```typescript
 import { airSpeedIndicator } from "cockpit-charts";
 import type { AirSpeedConfigModel, AirSpeedStateModel } from "cockpit-charts";
-
-const container = document.getElementById("asi-container")!;
 
 const config: AirSpeedConfigModel = {
   unit: "KNOTS",
