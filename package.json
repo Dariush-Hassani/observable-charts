@@ -1,11 +1,17 @@
 {
   "name": "cockpit-charts",
   "version": "1.0.1",
+  "description": "A lightweight, animated and customizable charting library for building interactive cockpit instruments using modular D3.js.",
   "type": "module",
   "main": "./dist/cockpit-charts.umd.cjs",
   "module": "./dist/cockpit-charts.js",
   "types": "./dist/index.d.ts",
-  "repository": "https://github.com/Dariush-Hassani/cockpit-charts",
+  "repository": {
+    "type":"git",
+    "url":"https://github.com/Dariush-Hassani/cockpit-charts"
+  },
+  "homepage": "https://dariush-hassani.github.io/cockpit-charts/",
+  "license": "ISC",
   "exports": {
     ".": {
       "import": "./dist/cockpit-charts.js",
@@ -16,10 +22,12 @@
   "files": [
     "dist"
   ],
-  "scripts": {
+ "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:demo": "tsc && vite build --config vite.config.demo.ts --outDir dist-demo",
+    "deploy": "gh-pages -d dist-demo"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.4",
@@ -28,23 +36,32 @@
     "@types/d3-selection": "^3.0.11",
     "@types/d3-shape": "^3.1.8",
     "@types/node": "^25.6.0",
+    "gh-pages": "^6.3.0",
     "tailwindcss": "^4.2.4",
     "vite": "^8.0.10",
     "vite-plugin-dts": "^5.0.0"
   },
-   "peerDependencies": {
+  "peerDependencies": {
     "d3-array": "^3.2.4",
     "d3-scale": "^4.0.2",
     "d3-selection": "^3.0.0",
     "d3-shape": "^3.2.0"
   },
   "peerDependenciesMeta": {
-    "d3-array": { "optional": false },
-    "d3-scale": { "optional": false },
-    "d3-selection": { "optional": false },
-    "d3-shape": { "optional": false }
+    "d3-array": {
+      "optional": false
+    },
+    "d3-scale": {
+      "optional": false
+    },
+    "d3-selection": {
+      "optional": false
+    },
+    "d3-shape": {
+      "optional": false
+    }
   },
-    "keywords": [
+  "keywords": [
     "aviation",
     "cockpit",
     "flight-instruments",
