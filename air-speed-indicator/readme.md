@@ -290,16 +290,10 @@ Removes the chart from the DOM and releases all resources (ResizeObserver, anima
 
 All types are re-exported from the package root and can be imported alongside the main function:
 
-typescript
+```typescript
 import { airSpeedIndicator } from "cockpit-charts";
-import type {
-AirSpeedConfigModel,
-AirSpeedStateModel,
-AirSpeedStyleConfigModel,
-AirSpeedTickConfigModel,
-AirSpeedColorBandModel,
-AirSpeedVSpeedMarkerModel,
-} from "cockpit-charts";
+import type { AirSpeedConfigModel, AirSpeedStateModel, AirSpeedStyleConfigModel, AirSpeedTickConfigModel, AirSpeedColorBandModel, AirSpeedVSpeedMarkerModel } from "cockpit-charts";
+```
 
 | Type                        | Description                                                                        |
 | --------------------------- | ---------------------------------------------------------------------------------- |
