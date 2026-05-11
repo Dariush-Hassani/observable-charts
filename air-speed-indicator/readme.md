@@ -67,7 +67,7 @@ const config: AirSpeedConfigModel = {
     { speed: 180, label: "Vne", color: "#B92528" },
     { speed: 120, label: "Vs", color: "#389D24" },
   ],
-  initialValue: { airSpeed: 120 },
+  initialValue: { airSpeed: 0 },
 };
 
 const chart = airSpeedIndicator("#asi-container", config);
@@ -115,7 +115,7 @@ export function AirSpeedGauge({ airspeed }: AirSpeedGaugeProps) {
         { speed: 180, label: "Vne", color: "#B92528" },
         { speed: 120, label: "Vs", color: "#389D24" },
       ],
-      initialValue: { airSpeed: 120 },
+      initialValue: { airSpeed: 0 },
     };
 
     chartRef.current = airSpeedIndicator(containerRef.current, config);
@@ -129,7 +129,7 @@ export function AirSpeedGauge({ airspeed }: AirSpeedGaugeProps) {
     chartRef.current?.update({ airSpeed: airspeed });
   }, [airspeed]);
 
-  return <div ref={containerRef} style={{ width: "100%", height: "400px" }} />;
+  return <div ref={containerRef} style={{ width: "100%", height: "600px" }} />;
 }
 ```
 
