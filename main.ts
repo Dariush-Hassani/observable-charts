@@ -21,34 +21,34 @@ const baseConfig: AirSpeedConfigModel = {
   ],
   initialValue: { airSpeed: 120 },
 };
-let x = airSpeedIndicator("#air-speed-chart", baseConfig);
+let chart = airSpeedIndicator("#air-speed-chart", baseConfig);
 
 setTimeout(() => {
-  x.update({
+  chart.update({
     airSpeed: 150,
   });
 }, 2000);
 
 setTimeout(() => {
-  x.update({
+  chart.update({
     airSpeed: 170,
   });
 }, 3000);
 
 setTimeout(() => {
-  x.update({
+  chart.update({
     airSpeed: 200,
   });
 }, 4000);
 
 setTimeout(() => {
-  x.update({
+  chart.update({
     airSpeed: 220,
   });
 }, 4000);
 
 setTimeout(() => {
-  x.update({
+  chart.update({
     airSpeed: 120,
   });
 }, 5000);
