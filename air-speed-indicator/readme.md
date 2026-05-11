@@ -53,20 +53,21 @@ const container = document.getElementById("asi-container")!;
 const config: AirSpeedConfigModel = {
   unit: "KNOTS",
   minSpeed: 0,
-  maxSpeed: 200,
-  visibleRange: 80,
+  maxSpeed: 250,
+  visibleRange: 80, // Shows 40 knots above and 40 knots below the center
   colorBands: [
-    { min: 0, max: 40, color: "#FF0000" },
-    { min: 40, max: 85, color: "#FFFF00" },
-    { min: 85, max: 200, color: "#00FF00" },
+    { min: 40, max: 85, color: "#FFFFFF" }, // White (Flap operating range)
+    { min: 85, max: 130, color: "#389D24" }, // Green (Normal operating range)
+    { min: 130, max: 160, color: "#EDC427" }, // Yellow (Caution range)
+    { min: 160, max: 250, color: "#B92528" }, // Red (Danger range)
   ],
   vSpeeds: [
-    { speed: 40, label: "Vso", color: "#FF4444" },
-    { speed: 85, label: "Vfe", color: "#FFAA00" },
-    { speed: 140, label: "Vno", color: "#FFAA00" },
-    { speed: 180, label: "Vne", color: "#FF0000" },
+    { speed: 80, label: "Vfe", color: "#FFFFFF" },
+    { speed: 150, label: "Vno", color: "#EDC427" },
+    { speed: 180, label: "Vne", color: "#B92528" },
+    { speed: 120, label: "Vs", color: "#389D24" },
   ],
-  initialValue: { airSpeed: 60 },
+  initialValue: { airSpeed: 120 },
 };
 
 const chart = airSpeedIndicator("#asi-container", config);
@@ -100,19 +101,21 @@ export function AirSpeedGauge({ airspeed }: AirSpeedGaugeProps) {
     const config: AirSpeedConfigModel = {
       unit: "KNOTS",
       minSpeed: 0,
-      maxSpeed: 200,
-      visibleRange: 80,
+      maxSpeed: 250,
+      visibleRange: 80, // Shows 40 knots above and 40 knots below the center
       colorBands: [
-        { min: 0, max: 40, color: "#FF0000" },
-        { min: 40, max: 85, color: "#FFFF00" },
-        { min: 85, max: 200, color: "#00FF00" },
+        { min: 40, max: 85, color: "#FFFFFF" }, // White (Flap operating range)
+        { min: 85, max: 130, color: "#389D24" }, // Green (Normal operating range)
+        { min: 130, max: 160, color: "#EDC427" }, // Yellow (Caution range)
+        { min: 160, max: 250, color: "#B92528" }, // Red (Danger range)
       ],
       vSpeeds: [
-        { speed: 40, label: "Vso", color: "#FF4444" },
-        { speed: 85, label: "Vfe", color: "#FFAA00" },
-        { speed: 140, label: "Vno", color: "#FFAA00" },
-        { speed: 180, label: "Vne", color: "#FF0000" },
+        { speed: 80, label: "Vfe", color: "#FFFFFF" },
+        { speed: 150, label: "Vno", color: "#EDC427" },
+        { speed: 180, label: "Vne", color: "#B92528" },
+        { speed: 120, label: "Vs", color: "#389D24" },
       ],
+      initialValue: { airSpeed: 120 },
     };
 
     chartRef.current = airSpeedIndicator(containerRef.current, config);

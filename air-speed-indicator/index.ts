@@ -7,7 +7,7 @@ import { symbol, symbolTriangle } from "d3-shape";
 import { clamped, createAnimatedValue, getTriangleAreaFromSide } from "../lib/helpers";
 
 export const airSpeedIndicator = (
-  containerSelector: string,
+  containerSelector: string | HTMLElement,
   chartConfig: AirSpeedConfigModel,
   ticksConfig: AirSpeedTickConfigModel = baseTickConfig,
   stylesConfig: AirSpeedStyleConfigModel = baseStyleConfig,
@@ -18,7 +18,7 @@ export const airSpeedIndicator = (
   const clipId = `air-speed-clip-${(Math.random() * 10000).toFixed(0)}`;
 
   // 1. Container Validation
-  const container = select(containerSelector).node();
+  const container = typeof containerSelector === "string" ? select(containerSelector as string).node() : select(containerSelector as HTMLElement).node();
   if (!container) throw new Error(`AirSpeedIndicator: Container element '${containerSelector}' not found!`);
 
   // 2. Config Validation
