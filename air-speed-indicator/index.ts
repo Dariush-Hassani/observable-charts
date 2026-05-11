@@ -53,9 +53,7 @@ export const airSpeedIndicator = (
   let centerX = 0;
   let svgHeight = 0;
   let svgWidth = 0;
-  let effectiveHeight = 0;
   let ribbonHeight = 0;
-  let paddingTop = 0;
   //--------dimension data--------
 
   let airSpeedAnimation: ReturnType<typeof createAnimatedValue> | null = null;
@@ -68,7 +66,8 @@ export const airSpeedIndicator = (
     .style("height", "100%")
     .style("display", "block")
     .style("font-family", mergedStylesConfig.fontFamily)
-    .attr("class", `air-speed-indicator`);
+    .attr("class", `air-speed-indicator`)
+    .append("g");
   //--------SVG--------
 
   //--------Clippath--------
@@ -157,24 +156,10 @@ export const airSpeedIndicator = (
     .text(chartConfig.unit);
   //--------CenterBox--------
 
-  //--------Title--------
-  const titleGroup = svg.append("g").style("dominant-baseline", "text-before-edge").style("text-anchor", "middle").attr("class", `title-group`);
-  const titleText = titleGroup
-    .append("text")
-    .style("font-size", mergedStylesConfig.titleFontSize)
-    .style("font-weight", mergedStylesConfig.titleFontWeight)
-    .style("fill", mergedStylesConfig.titleFontColor);
-  const unitText = titleGroup
-    .append("text")
-    .style("font-size", mergedStylesConfig.unitFontSize)
-    .style("font-weight", mergedStylesConfig.unitFontWeight)
-    .style("fill", mergedStylesConfig.unitFontColor);
-  //--------Title--------
-
   const performAirSpeedUpdate = () => {
-    let centerY = effectiveHeight / 2;
+    let centerY = svgHeight / 2;
     let airSpeedY = valueScale(currentData.airSpeed);
-    let airSpeedTargetY = paddingTop + (centerY - airSpeedY);
+    let airSpeedTargetY = centerY - airSpeedY;
 
     const mainX = centerX - mergedStylesConfig.mainRibbonWidth / 2;
     const colorX = centerX - (mergedStylesConfig.mainRibbonWidth / 2 + mergedStylesConfig.ribbonGap + mergedStylesConfig.colorBandWidth);
@@ -232,22 +217,14 @@ export const airSpeedIndicator = (
     centerX = svgWidth / 2;
     //--------Calculating dimensions stpe1--------
 
-    //--------Set title and unit--------
-    titleGroup.attr("transform", `translate(${centerX},0)`);
-    titleText.text(chartConfig.title);
-    unitText.text(chartConfig.unit).attr("y", titleText.node()?.getBBox().height ?? 0);
-    //--------Set title and unit--------
-
     //--------Calculating dimensions stpe2--------
-    paddingTop = (titleGroup.node()?.getBBox().height ?? 0) + 5;
-    effectiveHeight = svgHeight - paddingTop;
-    ribbonHeight = ((chartConfig.maxSpeed - chartConfig.minSpeed) * effectiveHeight) / chartConfig.visibleRange;
+    ribbonHeight = ((chartConfig.maxSpeed - chartConfig.minSpeed) * svgHeight) / chartConfig.visibleRange;
 
     valueScale.domain([chartConfig.minSpeed, chartConfig.maxSpeed]).range([ribbonHeight, 0]);
     //--------Calculating dimensions stpe2--------
 
     //--------ClipPath--------
-    clipRect.attr("x", 0).attr("y", paddingTop).attr("width", svgWidth).attr("height", effectiveHeight);
+    clipRect.attr("x", 0).attr("y", 0).attr("width", svgWidth).attr("height", svgHeight);
     //--------ClipPath--------
 
     //--------Main ribbon--------
@@ -411,7 +388,7 @@ export const airSpeedIndicator = (
     //--------Center Box--------
     centerBoxGroup.attr(
       "transform",
-      `translate(${centerX - mergedStylesConfig.centerBoxExtraWidth / 2 - mergedStylesConfig.mainRibbonWidth / 2},${paddingTop - mergedStylesConfig.centerBoxHeight / 2 + effectiveHeight / 2})`,
+      `translate(${centerX - mergedStylesConfig.centerBoxExtraWidth / 2 - mergedStylesConfig.mainRibbonWidth / 2},${-mergedStylesConfig.centerBoxHeight / 2 + svgHeight / 2})`,
     );
     centerBoxValueText.text("-"); // test for calculating height of text
     let centerBoxValueTextHeight = centerBoxValueText.node()?.getBBox().height ?? 0;
@@ -421,6 +398,17 @@ export const airSpeedIndicator = (
     centerBoxTextGroup.attr("transform", `translate(0,${(mergedStylesConfig.centerBoxHeight - centerBoxTextGroupHeight + 4) / 2})`);
     //--------Center Box--------
 
+    //--------Adjust Svg to center--------
+    let offset = mergedStylesConfig.ribbonGap + mergedStylesConfig.colorBandWidth + mergedStylesConfig.markerGap + mergedStylesConfig.vSpeedMarkerSize + mergedStylesConfig.markerGap;
+    let maxVLabel = 0;
+    vSpeedLabelGroup.each(function () {
+      let width = select(this).node()?.getBBox().width ?? 0;
+      if (width > maxVLabel) maxVLabel = width;
+    });
+    offset += maxVLabel - mergedStylesConfig.centerBoxExtraWidth / 2;
+    //--------Adjust Svg to center--------
+    svg.attr("transform", `translate(${offset / 2},0)`);
+    clipRect.attr("transform", `translate(${-offset / 2},0)`);
     update(currentData, false);
   };
 

@@ -4,7 +4,7 @@ A collection of highly customizable, responsive flight instrument charts for the
 
 ---
 
-![Cockpit Charts](https://raw.githubusercontent.com/Dariush-Hassani/cockpit-charts/refs/heads/main/public/all-charts.gif)
+![Cockpit Charts](https://raw.githubusercontent.com/Dariush-Hassani/cockpit-charts/refs/heads/main/public/charts.gif)
 
 ## Installation
 

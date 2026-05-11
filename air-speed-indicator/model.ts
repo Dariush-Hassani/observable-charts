@@ -26,13 +26,6 @@ export interface AirSpeedTickConfigModel {
 export interface AirSpeedStyleConfigModel {
   fontFamily?: string;
   animationDuration?: number;
-  // Title & Unit
-  titleFontSize?: number;
-  titleFontWeight?: number;
-  titleFontColor?: string;
-  unitFontSize?: number;
-  unitFontWeight?: number;
-  unitFontColor?: string;
 
   // Main Ribbon
   mainRibbonWidth?: number;
@@ -82,7 +75,6 @@ export interface AirSpeedStyleConfigModel {
 
 // Used once to initialize and draw the chart
 export interface AirSpeedConfigModel {
-  title: string; //Displayed title (e.g AIRSPEED)
   unit: string; // Displayed unit (e.g., 'KNOTS', 'MPH')
   minSpeed: number; // Minimum absolute speed on the tape
   maxSpeed: number; // Maximum absolute speed on the tape

@@ -2,7 +2,7 @@
 
 A fully customizable, responsive airspeed tape chart — part of the `cockpit-charts` library. Built with TypeScript and D3.js, compatible with any modern framework.
 
-![AirSpeed Indicator Demo](https://raw.githubusercontent.com/Dariush-Hassani/cockpit-charts/refs/heads/main/public/iass.gif)
+![AirSpeed Indicator Demo](https://raw.githubusercontent.com/Dariush-Hassani/cockpit-charts/refs/heads/main/public/ias.gif)
 
 ---
 
@@ -51,7 +51,6 @@ import type { AirSpeedConfigModel, AirSpeedStateModel } from "cockpit-charts";
 const container = document.getElementById("asi-container")!;
 
 const config: AirSpeedConfigModel = {
-  title: "AIRSPEED",
   unit: "KNOTS",
   minSpeed: 0,
   maxSpeed: 200,
@@ -99,7 +98,6 @@ export function AirSpeedGauge({ airspeed }: AirSpeedGaugeProps) {
     if (!containerRef.current) return;
 
     const config: AirSpeedConfigModel = {
-      title: "AIRSPEED",
       unit: "KNOTS",
       minSpeed: 0,
       maxSpeed: 200,
@@ -169,7 +167,6 @@ import type { AirSpeedStyleConfigModel } from "cockpit-charts";
 
 const styles: AirSpeedStyleConfigModel = {
   fontFamily: "monospace",
-  titleFontColor: "#FFCC00",
   unitFontColor: "#12bcd9",
   mainRibbonBgColor: "#1a1a2e",
   mainRibbonStrokeColor: "#4a4a8a",
@@ -193,17 +190,11 @@ airSpeedIndicator("#asi-container", config, undefined, styles);
 | ----------------- | -------- | ------------- |
 | `animationDuration`| `number` | `500` |
 
-**Typography & Title**
+**Typography**
 
-| Property          | Type     | Default       |
-| ----------------- | -------- | ------------- |
-| `fontFamily`      | `string` | `"system-ui"` |
-| `titleFontSize`   | `number` | `18`          |
-| `titleFontWeight` | `number` | `600`         |
-| `titleFontColor`  | `string` | `"#FFFFFF"`   |
-| `unitFontSize`    | `number` | `16`          |
-| `unitFontWeight`  | `number` | `600`         |
-| `unitFontColor`   | `string` | `"#12bcd9"`   |
+| Property     | Type     | Default       |
+| ------------ | -------- | ------------- |
+| `fontFamily` | `string` | `"system-ui"` |
 
 **Main Ribbon (the scrolling tape)**
 
@@ -262,12 +253,12 @@ airSpeedIndicator("#asi-container", config, undefined, styles);
 
 ### `airSpeedIndicator(container, config, ticksConfig?, stylesConfig?)`
 
-| Parameter      | Type                       | Required | Description                                            |
-| -------------- | -------------------------- | -------- | ------------------------------------------------------ |
-| `container`    | `string \| HTMLElement`    | Yes      | CSS selector or DOM element for the chart container    |
-| `config`       | `AirSpeedConfigModel`      | Yes      | Chart data (speed range, title, color bands, V-speeds) |
-| `ticksConfig`  | `AirSpeedTickConfigModel`  | No       | Tick interval settings (merged with defaults)          |
-| `stylesConfig` | `AirSpeedStyleConfigModel` | No       | Visual style overrides (merged with defaults)          |
+| Parameter      | Type                       | Required | Description                                         |
+| -------------- | -------------------------- | -------- | --------------------------------------------------- |
+| `container`    | `string \| HTMLElement`    | Yes      | CSS selector or DOM element for the chart container |
+| `config`       | `AirSpeedConfigModel`      | Yes      | Chart data (speed range, color bands, V-speeds)     |
+| `ticksConfig`  | `AirSpeedTickConfigModel`  | No       | Tick interval settings (merged with defaults)       |
+| `stylesConfig` | `AirSpeedStyleConfigModel` | No       | Visual style overrides (merged with defaults)       |
 
 **Returns:** `{ update: (data: AirSpeedStateModel, animate?: boolean) => void; destroy: () => void }`
 
@@ -295,13 +286,13 @@ import { airSpeedIndicator } from "cockpit-charts";
 import type { AirSpeedConfigModel, AirSpeedStateModel, AirSpeedStyleConfigModel, AirSpeedTickConfigModel, AirSpeedColorBandModel, AirSpeedVSpeedMarkerModel } from "cockpit-charts";
 ```
 
-| Type                        | Description                                                                        |
-| --------------------------- | ---------------------------------------------------------------------------------- |
-| `AirSpeedConfigModel`       | Full initialisation config (title, unit, speed range, color bands, V-speeds, etc.) |
-| `AirSpeedStateModel`        | Runtime state used by `update()` (`{ airSpeed: number }`)                          |
-| `AirSpeedStyleConfigModel`  | Optional visual overrides (fonts, colors, sizes, etc.)                             |
-| `AirSpeedTickConfigModel`   | Optional tick interval configuration (`majorInterval`, `minorSubdivisions`)        |
-| `AirSpeedColorBandModel`    | Shape of each color band in the tape (`min`, `max`, `color`)                       |
-| `AirSpeedVSpeedMarkerModel` | Shape of each V-speed marker (`speed`, `label`, `color`)                           |
+| Type                        | Description                                                                 |
+| --------------------------- | --------------------------------------------------------------------------- |
+| `AirSpeedConfigModel`       | Full initialisation config (unit, speed range, color bands, V-speeds, etc.) |
+| `AirSpeedStateModel`        | Runtime state used by `update()` (`{ airSpeed: number }`)                   |
+| `AirSpeedStyleConfigModel`  | Optional visual overrides (fonts, colors, sizes, etc.)                      |
+| `AirSpeedTickConfigModel`   | Optional tick interval configuration (`majorInterval`, `minorSubdivisions`) |
+| `AirSpeedColorBandModel`    | Shape of each color band in the tape (`min`, `max`, `color`)                |
+| `AirSpeedVSpeedMarkerModel` | Shape of each V-speed marker (`speed`, `label`, `color`)                    |
 
 ---

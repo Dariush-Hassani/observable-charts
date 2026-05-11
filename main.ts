@@ -2,7 +2,6 @@ import { airSpeedIndicator } from "./air-speed-indicator";
 import type { AirSpeedConfigModel } from "./air-speed-indicator/model";
 import "./style.css";
 const baseConfig: AirSpeedConfigModel = {
-  title: "AIRSPEED",
   unit: "KNOTS",
   minSpeed: 0,
   maxSpeed: 250,

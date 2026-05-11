@@ -14,13 +14,6 @@ export const baseTickConfig: AirSpeedTickConfigModel = {
 export const baseStyleConfig: Required<AirSpeedStyleConfigModel> = {
   fontFamily: "system-ui",
   animationDuration: 500,
-  // Title and Unit
-  titleFontSize: 18,
-  titleFontWeight: 600,
-  titleFontColor: "#FFFFFF",
-  unitFontSize: 16,
-  unitFontWeight: 600,
-  unitFontColor: "#12bcd9",
 
   // Main Background Ribbon
   mainRibbonWidth: 140,
