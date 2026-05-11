@@ -30,7 +30,7 @@ npm i cockpit-charts
 | ------------------------ | :-------------------------------------------------------------------------------------: | :----------------------------------------------------------: |
 | Airspeed Indicator       | [docs](https://github.com/Dariush-Hassani/cockpit-charts/tree/main/air-speed-indicator) | [demo](https://observablehq.com/@dariush/airspeed-indicator) |
 | Attitude Indicator       |                                       In progress                                       |                         In progress                          |
-| Altimeter                |                                       In progress                                       |                         In progress                          |
+| Altitude Indicator       |                                       In progress                                       |                         In progress                          |
 | Vertical Speed Indicator |                                       In progress                                       |                         In progress                          |
 | Compass                  |                                       In progress                                       |                         In progress                          |
 

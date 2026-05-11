@@ -70,13 +70,13 @@
     "d3.js",
     "charts",
     "data-visualization",
-    "Altimeter",
+    "Altitude",
     "Attitude",
     "Airspeed",
     "Vertical-Speed",
     "Airspeed-Indicator",
     "Attitude-Indicator",
-    "altimeter-Indicator",
+    "Altitude-Indicator",
     "Vertical-Speed-Indicator",
     "Compass"
   ]
