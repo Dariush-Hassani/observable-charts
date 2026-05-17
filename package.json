@@ -1,6 +1,6 @@
 {
   "name": "cockpit-charts",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A lightweight, animated and customizable charting library for building interactive cockpit instruments using modular D3.js.",
   "type": "module",
   "main": "./dist/cockpit-charts.umd.cjs",
@@ -73,10 +73,8 @@
     "Altimeter",
     "Attitude",
     "Airspeed",
-    "Vertical-Speed",
     "Airspeed-Indicator",
     "Attitude-Indicator",
-    "Vertical-Speed-Indicator",
     "Compass"
   ]
 }

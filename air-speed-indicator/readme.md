@@ -205,7 +205,7 @@ airSpeedIndicator("#asi-container", config, undefined, styles);
 
 | Property                | Type     | Default         |
 | ----------------------- | -------- | --------------- |
-| `mainRibbonWidth`       | `number` | `140`           |
+| `mainRibbonWidth`       | `number` | `100`           |
 | `mainRibbonBgColor`     | `string` | `"transparent"` |
 | `mainRibbonStrokeColor` | `string` | `"#FFFFFF"`     |
 
@@ -215,40 +215,40 @@ airSpeedIndicator("#asi-container", config, undefined, styles);
 | -------------------------- | -------- | ----------- |
 | `centerBoxBgColor`         | `string` | `"#000000"` |
 | `centerBoxStrokeColor`     | `string` | `"#FFFFFF"` |
-| `centerBoxValueFontSize`   | `number` | `36`        |
+| `centerBoxValueFontSize`   | `number` | `22`        |
 | `centerBoxValueFontWeight` | `number` | `700`       |
 | `centerBoxValueFontColor`  | `string` | `"#FFFFFF"` |
 | `centerBoxUnitFontSize`    | `number` | `12`        |
 | `centerBoxUnitFontWeight`  | `number` | `700`       |
 | `centerBoxUnitFontColor`   | `string` | `"#12bcd9"` |
-| `centerBoxHeight`          | `number` | `80`        |
-| `centerBoxExtraWidth`      | `number` | `20`        |
+| `centerBoxHeight`          | `number` | `60`        |
+| `centerBoxExtraWidth`      | `number` | `10`        |
 | `centerBoxOpacity`         | `number` | `0.9`       |
-| `rectangleMarkerSize`      | `number` | `16`        |
+| `rectangleMarkerSize`      | `number` | `12`        |
 | `rectangleMarkerBgColor`   | `string` | `"#FFFFFF"` |
 
 **Ticks & Scale Labels**
 
 | Property              | Type     | Default     |
 | --------------------- | -------- | ----------- |
-| `majorTickLength`     | `number` | `30`        |
-| `minorTickLength`     | `number` | `15`        |
+| `majorTickLength`     | `number` | `20`        |
+| `minorTickLength`     | `number` | `10`        |
 | `tickColor`           | `string` | `"#C3CCCF"` |
-| `tickLabelFontSize`   | `number` | `22`        |
-| `tickLabelFontWeight` | `number` | `400`       |
+| `tickLabelFontSize`   | `number` | `16`        |
+| `tickLabelFontWeight` | `number` | `600`       |
 
 **V-Speed Markers & Color Ribbon**
 
 | Property                  | Type      | Default |
 | ------------------------- | --------- | ------- |
-| `colorBandWidth`          | `number`  | `10`    |
+| `colorBandWidth`          | `number`  | `5`     |
 | `ribbonGap`               | `number`  | `10`    |
-| `vSpeedMarkerSize`        | `number`  | `15`    |
+| `vSpeedMarkerSize`        | `number`  | `10`    |
 | `vSpeedMarkerStrokeWidth` | `number`  | `2`     |
 | `vSpeedMarkerHasBg`       | `boolean` | `true`  |
-| `vSpeedLabelFontSize`     | `number`  | `14`    |
+| `vSpeedLabelFontSize`     | `number`  | `12`    |
 | `vSpeedLabelFontWeight`   | `number`  | `600`   |
-| `vSpeedValueFontSize`     | `number`  | `18`    |
+| `vSpeedValueFontSize`     | `number`  | `12`    |
 | `vSpeedValueFontWeight`   | `number`  | `600`   |
 | `markerGap`               | `number`  | `4`     |
 

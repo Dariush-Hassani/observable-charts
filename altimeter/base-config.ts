@@ -16,41 +16,41 @@ export const baseStyleConfig: Required<AirSpeedStyleConfigModel> = {
   animationDuration: 500,
 
   // Main Background Ribbon
-  mainRibbonWidth: 100,
+  mainRibbonWidth: 140,
   mainRibbonBgColor: "transparent",
   mainRibbonStrokeColor: "#FFFFFF",
 
   // Center Box (Current Speed Indicator)
   centerBoxBgColor: "#000000",
   centerBoxStrokeColor: "#FFFFFF",
-  centerBoxValueFontSize: 22,
+  centerBoxValueFontSize: 36,
   centerBoxValueFontWeight: 700,
   centerBoxValueFontColor: "#FFFFFF",
   centerBoxUnitFontSize: 12,
   centerBoxUnitFontWeight: 700,
   centerBoxUnitFontColor: "#12bcd9",
-  centerBoxHeight: 60,
-  centerBoxExtraWidth: 10,
+  centerBoxHeight: 80,
+  centerBoxExtraWidth: 20,
   centerBoxOpacity: 0.9,
   rectangleMarkerBgColor: "#FFFFFF",
-  rectangleMarkerSize: 12,
+  rectangleMarkerSize: 16,
 
   // Ticks and Scale Labels
-  majorTickLength: 20,
-  minorTickLength: 10,
+  majorTickLength: 30,
+  minorTickLength: 15,
   tickColor: "#C3CCCF",
-  tickLabelFontSize: 16,
-  tickLabelFontWeight: 600,
+  tickLabelFontSize: 22,
+  tickLabelFontWeight: 400,
 
   // V-Speeds Color Bands and Markers
-  colorBandWidth: 5,
+  colorBandWidth: 10,
   ribbonGap: 10, //Space between main ribbon and color ribbon
-  vSpeedMarkerSize: 10,
+  vSpeedMarkerSize: 15,
   vSpeedMarkerStrokeWidth: 2,
   vSpeedMarkerHasBg: true,
-  vSpeedLabelFontSize: 12,
+  vSpeedLabelFontSize: 14,
   vSpeedLabelFontWeight: 600,
-  vSpeedValueFontSize: 14,
+  vSpeedValueFontSize: 18,
   vSpeedValueFontWeight: 600,
   markerGap: 4, //Space between marker and color ribbon
 };
