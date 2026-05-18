@@ -150,7 +150,7 @@ import type { AirSpeedTickConfigModel } from "cockpit-charts";
 
 const ticks: AirSpeedTickConfigModel = {
   majorInterval: 20, // default: 10
-  minorSubdivisions: 2, // default: 5
+  minorSubdivisions: 2, // default: 10
 };
 
 airSpeedIndicator("#asi-container", config, ticks);
@@ -159,7 +159,7 @@ airSpeedIndicator("#asi-container", config, ticks);
 | Property            | Type     | Default | Description                                   |
 | ------------------- | -------- | ------- | --------------------------------------------- |
 | `majorInterval`     | `number` | `10`    | Interval between major (labeled) ticks        |
-| `minorSubdivisions` | `number` | `5`     | Number of minor ticks between two major ticks |
+| `minorSubdivisions` | `number` | `10`    | Number of minor ticks between two major ticks |
 
 ---
 

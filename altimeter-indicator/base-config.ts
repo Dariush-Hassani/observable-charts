@@ -1,16 +1,16 @@
-import type { AirSpeedStyleConfigModel, AirSpeedTickConfigModel } from "./model";
+import type { AltimeterStyleConfigModel, AltimeterTickConfigModel } from "./model";
 
-export const baseTickConfig: AirSpeedTickConfigModel = {
-  majorInterval: 10,
+export const baseTickConfig: AltimeterTickConfigModel = {
+  majorInterval: 500,
   minorSubdivisions: 10,
 };
 
-export const baseStyleConfig: Required<AirSpeedStyleConfigModel> = {
+export const baseStyleConfig: Required<AltimeterStyleConfigModel> = {
   fontFamily: "system-ui",
   animationDuration: 500,
 
   // Main Background Ribbon
-  mainRibbonWidth: 100,
+  mainRibbonWidth: 120,
   mainRibbonBgColor: "transparent",
   mainRibbonStrokeColor: "#FFFFFF",
 
@@ -36,15 +36,17 @@ export const baseStyleConfig: Required<AirSpeedStyleConfigModel> = {
   tickLabelFontSize: 16,
   tickLabelFontWeight: 600,
 
-  // V-Speeds Color Bands and Markers
-  colorBandWidth: 5,
-  ribbonGap: 10,
-  vSpeedMarkerSize: 10,
-  vSpeedMarkerStrokeWidth: 2,
-  vSpeedMarkerHasBg: true,
-  vSpeedLabelFontSize: 12,
-  vSpeedLabelFontWeight: 600,
-  vSpeedValueFontSize: 14,
-  vSpeedValueFontWeight: 600,
-  markerGap: 4,
+  //marker
+  markerSize: 10,
+  markerStrokeWidth: 2,
+  markerHasBg: true,
+  markerGap: 8,
+
+  //baro
+  baroContainerHeight: 30,
+  baroBackgroundColor: "#222222",
+  baroStrokeColor: "#FFFFFF",
+  baroFontColor: "#FFFFFF",
+  baroFontSize: 14,
+  baroFontWeight: 600,
 };

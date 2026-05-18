@@ -1,21 +1,14 @@
-export interface AirSpeedColorBandModel {
-  min: number;
-  max: number;
+export interface AltimeterMarkerModel {
+  value: number;
   color: string;
 }
 
-export interface AirSpeedVSpeedMarkerModel {
-  speed: number;
-  label: string;
-  color: string;
-}
-
-export interface AirSpeedTickConfigModel {
+export interface AltimeterTickConfigModel {
   majorInterval?: number;
   minorSubdivisions?: number;
 }
 
-export interface AirSpeedStyleConfigModel {
+export interface AltimeterStyleConfigModel {
   fontFamily?: string;
   animationDuration?: number;
 
@@ -24,7 +17,7 @@ export interface AirSpeedStyleConfigModel {
   mainRibbonBgColor?: string;
   mainRibbonStrokeColor?: string;
 
-  // Center Box
+  // Center Box (Current altitude Indicator)
   centerBoxBgColor?: string;
   centerBoxStrokeColor?: string;
   centerBoxValueFontSize?: number;
@@ -48,30 +41,33 @@ export interface AirSpeedStyleConfigModel {
   tickLabelFontSize?: number;
   tickLabelFontWeight?: number;
 
-  // V-Speeds (Side Ribbon)
-  colorBandWidth?: number;
-  ribbonGap?: number;
-  vSpeedMarkerSize?: number;
-  vSpeedMarkerStrokeWidth?: number;
-  vSpeedMarkerHasBg?: boolean;
-  vSpeedLabelFontSize?: number;
-  vSpeedLabelFontWeight?: number;
-  vSpeedValueFontSize?: number;
-  vSpeedValueFontWeight?: number;
+  // Markers
+  markerSize?: number;
+  markerStrokeWidth?: number;
+  markerHasBg?: boolean;
   markerGap?: number;
+
+  // Baro Styling
+  baroContainerHeight?: number;
+  baroBackgroundColor?: string;
+  baroFontSize?: number;
+  baroFontColor?: string;
+  baroFontWeight?: number | string;
+  baroStrokeColor?: string;
 }
 
 // Used once to initialize and draw the chart
-export interface AirSpeedConfigModel {
+export interface AltimeterConfigModel {
   unit: string;
-  minSpeed: number;
-  maxSpeed: number;
+  minAltitude: number;
+  maxAltitude: number;
   visibleRange: number;
-  colorBands: AirSpeedColorBandModel[];
-  vSpeeds: AirSpeedVSpeedMarkerModel[];
-  initialValue?: AirSpeedStateModel;
+  baroUnit?: string;
+  markers?: AltimeterMarkerModel[];
+  initialValue?: AltimeterStateModel;
 }
 
-export interface AirSpeedStateModel {
-  airSpeed: number;
+export interface AltimeterStateModel {
+  altitude: number;
+  baro?: number;
 }

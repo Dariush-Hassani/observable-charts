@@ -75,6 +75,7 @@
     "Airspeed",
     "Airspeed-Indicator",
     "Attitude-Indicator",
+    "Altimeter-Indicator",
     "Compass"
   ]
 }

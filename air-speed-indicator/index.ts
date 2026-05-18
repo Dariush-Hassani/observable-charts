@@ -30,7 +30,7 @@ export const airSpeedIndicator = (
     throw new Error("AirSpeedIndicator: 'visibleRange' must be greater than 0 and less than or equal to the total speed range.");
   }
 
-  // 3. Color Bands Validation (Optional but recommended)
+  // 3. Color Bands Validation
   chartConfig.colorBands?.forEach((band, index) => {
     if (band.min >= band.max) {
       console.warn(`AirSpeedIndicator: Color band at index ${index} has invalid range (min: ${band.min}, max: ${band.max}).`);
@@ -43,6 +43,16 @@ export const airSpeedIndicator = (
       console.warn(`AirSpeedIndicator: 'initialValue.airSpeed' (${chartConfig.initialValue.airSpeed}) is out of the chart's min/max bounds.`);
     }
   }
+
+  // 5. markers Validation
+  chartConfig.vSpeeds?.forEach((marker, index) => {
+    if (typeof marker.speed !== "number" || isNaN(marker.speed)) {
+      console.warn(`AirSpeedIndicator: marker at index ${index} has invalid speed.`);
+    }
+    if (marker.speed > chartConfig.maxSpeed || marker.speed < chartConfig.minSpeed) {
+      console.warn(`AirSpeedIndicator: marker at index ${index} has invalid range (min: ${chartConfig.minSpeed}, max: ${chartConfig.maxSpeed}).`);
+    }
+  });
 
   let currentData: AirSpeedStateModel = chartConfig.initialValue
     ? chartConfig.initialValue
@@ -80,9 +90,9 @@ export const airSpeedIndicator = (
   const vSpeedMarkerGroup = ribonClipPathGroup.append("g").attr("class", `v-speed-marker-group`);
   //--------VspeedMarker--------
 
-  //--------ColorRibbin--------
+  //--------ColorRibbon--------
   const colorRibbonGroup = ribonClipPathGroup.append("g").attr("class", `color-ribbon-group`);
-  //--------ColorRibbin--------
+  //--------ColorRibbon--------
 
   //--------MainRibbon--------
   const mainRibbonGroup = ribonClipPathGroup.append("g").attr("class", `main-ribbon-group`);
@@ -181,7 +191,6 @@ export const airSpeedIndicator = (
   };
 
   const update = (newData: AirSpeedStateModel, animate: boolean = true) => {
-    currentData = newData;
     // 1. Type & NaN Validation
     if (!newData || typeof newData.airSpeed !== "number" || isNaN(newData.airSpeed)) {
       console.warn("AirSpeedIndicator: Received invalid 'airSpeed'. Update skipped.");
@@ -190,7 +199,6 @@ export const airSpeedIndicator = (
 
     // 2. Clamping Out-of-bounds Speed
     let safeAirSpeed = clamped(chartConfig.minSpeed, chartConfig.maxSpeed, newData.airSpeed);
-    currentData = { airSpeed: safeAirSpeed };
 
     if (newData.airSpeed !== safeAirSpeed) {
       console.debug(`AirSpeedIndicator: Airspeed (${newData.airSpeed}) clamped to ${safeAirSpeed}.`);
@@ -198,13 +206,14 @@ export const airSpeedIndicator = (
 
     if (animate) {
       if (!airSpeedAnimation) {
-        airSpeedAnimation = createAnimatedValue(chartConfig.initialValue ? chartConfig.initialValue.airSpeed : chartConfig.minSpeed, mergedStylesConfig.animationDuration, (value) => {
+        airSpeedAnimation = createAnimatedValue(currentData.airSpeed, mergedStylesConfig.animationDuration, (value) => {
           currentData = { airSpeed: value };
           performAirSpeedUpdate();
         });
       }
-      airSpeedAnimation.setTarget(currentData.airSpeed);
+      airSpeedAnimation.setTarget(safeAirSpeed);
     } else {
+      currentData = { airSpeed: safeAirSpeed };
       performAirSpeedUpdate();
     }
   };
