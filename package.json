@@ -1,6 +1,6 @@
 {
   "name": "cockpit-charts",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A lightweight, animated and customizable charting library for building interactive cockpit instruments using modular D3.js.",
   "type": "module",
   "main": "./dist/cockpit-charts.umd.cjs",
