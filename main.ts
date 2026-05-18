@@ -1,7 +1,7 @@
 import { airSpeedIndicator } from "./air-speed-indicator";
 import type { AirSpeedConfigModel } from "./air-speed-indicator/model";
 import { altimeterIndicator } from "./altimeter-indicator";
-import type { AltimeterConfigModel, AltimeterStateModel } from "./altimeter-indicator/model";
+import type { AltimeterConfigModel } from "./altimeter-indicator/model";
 import "./style.css";
 const airSpeedBaseConfig: AirSpeedConfigModel = {
   unit: "KNOTS",
