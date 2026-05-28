@@ -1,21 +1,21 @@
 {
-  "name": "cockpit-charts",
-  "version": "1.0.7",
-  "description": "A lightweight, animated and customizable charting library for building interactive cockpit instruments using modular D3.js.",
+  "name": "PFD-charts",
+  "version": "1.0.0",
+  "description": "A lightweight, animated and customizable charting library for building interactive Primary Flight Display instruments using modular D3.js.",
   "type": "module",
-  "main": "./dist/cockpit-charts.umd.cjs",
-  "module": "./dist/cockpit-charts.js",
+  "main": "./dist/PFD-charts.umd.cjs",
+  "module": "./dist/PFD-charts.js",
   "types": "./dist/index.d.ts",
   "repository": {
     "type":"git",
-    "url":"https://github.com/Dariush-Hassani/cockpit-charts"
+    "url":"https://github.com/Dariush-Hassani/PFD-charts"
   },
-  "homepage": "https://dariush-hassani.github.io/cockpit-charts/",
+  "homepage": "https://dariush-hassani.github.io/PFD-charts/",
   "license": "ISC",
   "exports": {
     ".": {
-      "import": "./dist/cockpit-charts.js",
-      "require": "./dist/cockpit-charts.umd.cjs",
+      "import": "./dist/PFD-charts.js",
+      "require": "./dist/PFD-charts.umd.cjs",
       "types": "./dist/index.d.ts"
     }
   },
@@ -64,6 +64,8 @@
   "keywords": [
     "aviation",
     "cockpit",
+    "drone",
+    "gcs",
     "flight-instruments",
     "avionics",
     "d3",

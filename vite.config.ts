@@ -7,8 +7,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "index.ts"),
-      name: "CockpitCharts",
-      fileName: "cockpit-charts",
+      name: "PFDCharts",
+      fileName: "PFD-charts",
     },
     sourcemap: true,
     rollupOptions: {
